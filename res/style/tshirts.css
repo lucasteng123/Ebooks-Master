@@ -1,0 +1,22 @@
+.tshirt-container{
+	max-height: 1000px;
+	overflow-y: auto;
+}
+.tshirt-container img{
+	max-height: 200px;
+}
+.colorSquare{
+	margin:0;
+	padding:0px;
+}
+.tshirt-thumb{
+	padding: 15px;
+}
+.tshirt-thumb h3{
+	padding-top:15px;
+
+	color: #000;
+}
+.tshirt-thumb img{
+	max-height: 250px;
+}
