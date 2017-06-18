@@ -14,6 +14,7 @@ $methods['run'] = function($instance) {
 	$eblog = new EbooksBlogMgr($con);
 	$ss = new SiteStrings($con);
 	$gc = new GuessContest($con);
+	$shirts = new ShirtMgr($con);
 
 	if ($_SESSION['logged_in'] === AccountMgr::SESSION_OKAY
 		&& $_SESSION['is_admin_user'] === "yes") {
@@ -28,6 +29,7 @@ $methods['run'] = function($instance) {
 		$html->ticker_messages = $sitedb->list_ticker_messages();
 		$html->categories = $sitedb->list_categories();
 		$html->newsletter_emails = $sitedb->get_newsletter_mails();
+		$html->shirts_list = $shirts->get_tshirt_list();
 
 		$vvote_info = array();
 		{

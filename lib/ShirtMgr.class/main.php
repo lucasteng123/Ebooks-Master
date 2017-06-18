@@ -87,6 +87,22 @@ class ShirtMgr {
 		$qr = $this->pdo->exec($sql);
 	}
 
+	function get_tshirt_list() {
+		// Get tools
+		$pdo = $this->pdo;
+		$sql = "SELECT * FROM tshirts";
+		// Prepare statement
+		$stmt = $pdo->prepare( $sql );
+		// Bind values
+		$stmt->execute();
+		// Fetch results into associative array
+		$result = array();
+		while ( $row = $stmt->fetch( PDO::FETCH_ASSOC ) ) {
+			$result[] = $row;
+		}
+		return $result;
+	}
+
 	// === TICKER MESSAGES ===
 	function insert_tshirt($title, $contents, $imageID) {
 		$sql = "INSERT INTO tshirts (title, contents, image_id, date_posted) VALUES (:title, :contents, :image_id, now())";
