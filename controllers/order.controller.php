@@ -45,6 +45,11 @@ $methods[ 'run' ] = function ( $instance ) {
 
 			$tmpl = new Template();
 			$tmpl->set_template_file(SITE_PATH . "/templates/tshirt_details.template.php");
+			$tmpl->tshirt = $tshirt;
+			$tmpl->id = $id;
+			$tmpl->colors = $colors;
+			$sizes = explode(",", $tshirt["size"]);
+			$tmpl->sizes = $sizes;
 
 			$html->part_bookview = $tmpl;
 			$html->run();
