@@ -20,3 +20,9 @@
 .tshirt-thumb img{
 	max-height: 250px;
 }
+.primary-color{
+	color:#aa0000;
+}
+.darkbg{
+	background-color: #EFEFEF;
+}
