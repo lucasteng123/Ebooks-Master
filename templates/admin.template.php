@@ -643,31 +643,61 @@
 
 			<div class="jq-page admin-canvas" data-name="shirts">
 				<form class="ajax-form blog-editor" data-name="tshirts_post">
-					<!-- FOR TSHIRT MODIFICATION, THIS FIELD WILL BE CHANGED BY JAVASCRIPT -->
-					<input name="postid" type="hidden" class="normal-input form-control" />
-					<div class="col col-xs-12">
-						<h1>Shirts</h1>
-					</div>
-					<div class="col col-sm-4">
-						<h3>Photo</h3>
-						<input class="file-input" name="post_image" type="file" />
-					</div>
-					<div class="col col-xs-8">
-						<h3>Name of Shirt</h3>
-						<input name="title" type="text" class="normal-input form-control" value="" />
-						<h3>Description of Shirt</h3>
-						<textarea name="contents" class="editor-area wide normal-input form-control"
-						STYLE="min-height: 20pt;"></textarea>
-					</div>
-					<div class="col col-sm-4">&nbsp;</div>
-					<div class="col col-sm-8">
-						<div class="spacer">&nbsp;</div>
-						<input name="update" type="submit" value="Add Shirt" class="btn btn-primary" />
-					</div>
-					<div class="col col-xs-12">
-						<span class="message"></span>
-					</div>
-					<div class="col col-xs-12 spacer"></div>
+
+		<div class="col-xs-12 tshirt-container">
+				<?php
+				$tmpl = new Template();
+				$tmpl->set_template_file(SITE_PATH . '/templates/parts/tshirt_single.template.php');
+				foreach($shirts_list as $tshirt) {
+					$tmpl->tshirt = $tshirt;
+					$tmpl->run();
+				}
+				?>
+		</div>
+		<div class="col-xs-12"><hr></div>
+		<div class="col-md-3"><h2 style="text-align: right;vertical-align: center;">New T-Shirt</h2></div>
+		<div class="col-md-9">
+			<div class="col-md-4"></div>
+			<div class="col-md-8"></div>
+
+			<form action="/tshirt-update"  method="post">
+
+				<div class="form-group">
+				<label for="image"> Path to Image </label>
+				<div class="input-group">
+					
+					<input type="text" class="form-control" name="image">
+					<span class="input-group-btn">
+        				<button class="btn btn-default" type="button">Browse</button>
+      				</span>
+				</div>
+				</div>
+				<div class="form-group">
+					<label for="name"> Name for T-Shirt </label>
+					<input type="text" class="form-control" name="name">
+				</div>
+				<div class="form-group">
+					<label for="name"> Description </label>
+					<input type="text" class="form-control" name="description">
+				</div>
+				<div class="form-group">
+					<label for="colors"> Desired Colors (comma seperated) </label>
+					<input type="text" class="form-control" name="colors">
+				</div>
+				<div class="form-group">
+					<label for="colors"> Desired Sizes (comma seperated) </label>
+					<input type="text" class="form-control" name="size">
+				</div>
+				<div class="input-group" style="padding:10px 0px 30px 0px">
+					
+					<span class="input-group-addon">$</span>
+					<input type="text" class="form-control" name="price">
+				</div>
+				<div class="form-group">
+					<input class="btn btn-primary" type="submit">
+				</div>
+			</form>	
+		</div>				
 				</form>
 			</div>
 
