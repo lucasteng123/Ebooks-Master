@@ -17,6 +17,8 @@ $methods[ 'run' ] = function ( $instance ) {
 	$redirect_url = WEB_PATH . "/?location=admin/shirts";
 	$message = "No message";
 
+	$insert_tshirt = "INSERT INTO tshirts (image, name, colors, price, size, description) VALUES (:img, :nm, :color, :price, :size, :description)";
+
 
 	//get POST variables
 	if ( $_POST[ "image" ] && $_POST[ "colors" ] && $_POST[ "name" ] && $_POST[ "price" ] ) {
@@ -31,13 +33,14 @@ $methods[ 'run' ] = function ( $instance ) {
 	//if there are no t-shirt ids passed
 	if ( count( $r ) < 1 ) {
 		//create the TShirt
-		$insert_tshirt = "INSERT INTO tshirts (image, name, colors, price) VALUES (:img, :nm, :color, :price)";
 		$stmt = $pdo->prepare( $insert_tshirt );
 		// Bind variables
 		$stmt->bindValue( "img", $image, PDO::PARAM_STR );
 		$stmt->bindValue( "nm", $name, PDO::PARAM_STR );
 		$stmt->bindValue( "color", $colors, PDO::PARAM_STR );
 		$stmt->bindValue( "price", $price, PDO::PARAM_STR );
+		$stmt->bindValue( "size", $size, PDO::PARAM_STR );
+		$stmt->bindValue( "description", $description, PDO::PARAM_STR );
 		// Insert the row
 		$stmt->execute();
 		$message = "created tshirt";
@@ -60,14 +63,14 @@ $methods[ 'run' ] = function ( $instance ) {
 
 		//if there is no tshirt with this ID, create it
 		if ( count( $result ) != 1 ) {
-
-			$insert_tshirt = "INSERT INTO tshirts (image, name, colors, price) VALUES (:img, :nm, :color, :price)";
 			$stmt = $pdo->prepare( $insert_tshirt );
 			// Bind variables
 			$stmt->bindValue( "img", $image, PDO::PARAM_STR );
 			$stmt->bindValue( "nm", $name, PDO::PARAM_STR );
 			$stmt->bindValue( "color", $colors, PDO::PARAM_STR );
 			$stmt->bindValue( "price", $price, PDO::PARAM_STR );
+			$stmt->bindValue( "size", $size, PDO::PARAM_STR );
+			$stmt->bindValue( "description", $description, PDO::PARAM_STR );
 			// Insert the row
 			$stmt->execute();
 			$message = "created tshirt";
@@ -83,13 +86,14 @@ $methods[ 'run' ] = function ( $instance ) {
 			$message = "updated old tshirt";
 			
 			//add updated tshirt
-			$insert_tshirt = "INSERT INTO tshirts (image, name, colors, price) VALUES (:img, :nm, :color, :price)";
 			$stmt = $pdo->prepare( $insert_tshirt );
 			// Bind variables
 			$stmt->bindValue( "img", $image, PDO::PARAM_STR );
 			$stmt->bindValue( "nm", $name, PDO::PARAM_STR );
 			$stmt->bindValue( "color", $colors, PDO::PARAM_STR );
 			$stmt->bindValue( "price", $price, PDO::PARAM_STR );
+			$stmt->bindValue( "size", $size, PDO::PARAM_STR );
+			$stmt->bindValue( "description", $description, PDO::PARAM_STR );
 			// Insert the row
 			$stmt->execute();
 			$message = "created new tshirt";
