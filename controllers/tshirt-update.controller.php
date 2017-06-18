@@ -14,15 +14,20 @@ $methods[ 'run' ] = function ( $instance ) {
 	$r = $instance->route;
 
 
+	$redirect_url = WEB_PATH . "/?location=admin/shirts";
+	$message = "No message";
+
+
 	//get POST variables
 	if ( $_POST[ "image" ] && $_POST[ "colors" ] && $_POST[ "name" ] && $_POST[ "price" ] ) {
-		$image = $_POST[ "image" ];
-		$colors = $_POST[ "colors" ];
-		$name = $_POST[ "name" ];
-		$price = $_POST[ "price" ];
+		// Do nothing
 	} else {
-		echo "no post";
+		$message = "no post";
 	}
+	$image = $_POST[ "image" ];
+	$colors = $_POST[ "colors" ];
+	$name = $_POST[ "name" ];
+	$price = $_POST[ "price" ];
 	//if there are no t-shirt ids passed
 	if ( count( $r ) < 1 ) {
 		//create the TShirt
@@ -35,7 +40,7 @@ $methods[ 'run' ] = function ( $instance ) {
 		$stmt->bindValue( "price", $price, PDO::PARAM_STR );
 		// Insert the row
 		$stmt->execute();
-		echo "created tshirt";
+		$message = "created tshirt";
 		//if there is a tshirt id passed
 	} else {
 		$tshirtID = $r[ 0 ];
@@ -65,7 +70,7 @@ $methods[ 'run' ] = function ( $instance ) {
 			$stmt->bindValue( "price", $price, PDO::PARAM_STR );
 			// Insert the row
 			$stmt->execute();
-			echo "created tshirt";
+			$message = "created tshirt";
 
 		} else {
 			//set last version of shirt as inactive
@@ -75,7 +80,7 @@ $methods[ 'run' ] = function ( $instance ) {
 			$stmt->bindValue( "id", $r[ 0 ], PDO::PARAM_INT );
 			// Insert the row
 			$stmt->execute();
-			echo "updated old tshirt";
+			$message = "updated old tshirt";
 			
 			//add updated tshirt
 			$insert_tshirt = "INSERT INTO tshirts (image, name, colors, price) VALUES (:img, :nm, :color, :price)";
@@ -87,9 +92,13 @@ $methods[ 'run' ] = function ( $instance ) {
 			$stmt->bindValue( "price", $price, PDO::PARAM_STR );
 			// Insert the row
 			$stmt->execute();
-			echo "created new tshirt";
+			$message = "created new tshirt";
 		}
 	}
+	?>
+	<h2><?php echo $message; ?></h2>
+	<a href="<?php echo $redirect_url; ?>">Return to admin page</a>
+	<?php
 };
 
 $page_controller = new Controller( $methods );
