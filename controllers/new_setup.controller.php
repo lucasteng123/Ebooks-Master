@@ -16,11 +16,11 @@ $methods['run'] = function($instance) {
 	}
 	$con = $instance->tools['con_manager']->get_connection();
 
-	$ebooks = new EbooksBlogMgr($con);
+	$shirts = new ShirtMgr($con);
 
 	// Setup for database modifications 2015-10-21
-	$ebooks->destroy_records();
-	$ebooks->setup();
+	$shirts->destroy_records();
+	$shirts->setup();
 
 	/*
 	// Setup for database modifications 2015-09-14

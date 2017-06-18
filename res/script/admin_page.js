@@ -201,6 +201,46 @@ function set_ajax_submits() {
 				e.stopPropagation();
 			    e.preventDefault();
 			});
+		} else if ($(obj).data('name') == "tshirts_post") {
+			$(obj).submit(function(e) {
+				var url = "index.php?location=ajax_admin/tshirts_post";
+				var form_data = new FormData();
+				{
+					$(obj).find('.normal-input').each(function (j, inputObj) {
+						var name = $(inputObj).attr('name');
+						var valu = $(inputObj).val();
+						form_data.append(name,valu);
+					});
+					$(obj).find('.file-input').each(function (j, inputObj) {
+						var name = $(inputObj).attr('name');
+						var valu = $(inputObj)[0].files[0];
+						form_data.append(name,valu);
+					});
+				}
+				var jqxhr = $.ajax({
+					type: "POST",
+					url: url,
+					data: form_data, // serializes the form's elements.
+					processData: false,
+					contentType: false,
+					dataType: "json"
+				});
+				jqxhr.done(function (data) {
+					if (data.status == "good") {
+						// Display success message sent by server
+						alert(data.message);
+						// Reset the form
+						$(obj)[0].reset();
+					} else {
+						alert("The following error occured:\n\n"+data.message);
+					}
+				});
+				jqxhr.fail(function () {
+					alert("An internal error occured!");
+				});
+				e.stopPropagation();
+			    e.preventDefault();
+			});
 		}
 	});
 	$('input[type=submit]').each(function (i, obj) {

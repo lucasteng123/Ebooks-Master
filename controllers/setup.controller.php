@@ -69,6 +69,9 @@ $methods['run'] = function($instance) {
 	echo "sitedb setup:\n";
 	$sitedb->setup();
 
+	echo "sitedb setup newsletters:\n";
+	$sitedb->setup_newsletter();
+
 	// --- create default ticker messages ---
 	$sitedb->insert_ticker_message_directly("Quick ask Zoey; what stops X-Rays?", null);
 	$sitedb->insert_ticker_message_directly("Red fish vanish, then grow bigger", null);

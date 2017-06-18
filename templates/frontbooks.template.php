@@ -1,8 +1,8 @@
 <?php function bookitems() { ?>
-			<?php for ($i=0; $i<6; $i++) { ?>
+			<?php for ($i=0; $i<8; $i++) { ?>
 			<div class="bookitem">
 				<div class="cover-container coverflow-item">
-					<div class="cover test-cover" style="background-image: url('./uploads/testimg/2.jpg');"></div>
+					<div class="cover test-cover" style="background-image: url('./res/img/white-t-shirt.svg'); background-size: contain; background-color: none; background-repeat: no-repeat;"></div>
 				</div>
 				<div class="text-container">
 					<h3 class="text-primary">Harry Potter 4 <small>J.K. Rowling</small></h3>
@@ -14,7 +14,7 @@
 			<?php } ?>
 			<div class="bookitem">
 				<div class="cover-container coverflow-item">
-					<div class="cover test-cover" style="background-image: url('./uploads/testimg/1.jpg');"></div>
+					<div class="cover test-cover" style="background-image: url('./res/img/white-t-shirt.svg'); background-size: contain; background-color: none; background-repeat: no-repeat;"></div>
 				</div>
 				<div class="text-container">
 					<h3 class="text-primary">Harry Potter 6 <small>J.K. Rowling</small></h3>
@@ -25,7 +25,7 @@
 			</div><!-- /.bookitem -->
 			<div class="bookitem">
 				<div class="cover-container coverflow-item">
-					<div class="cover test-cover" style="background-image: url('./uploads/testimg/2.jpg');"></div>
+					<div class="cover test-cover" style="background-image: url('./res/img/white-t-shirt.svg'); background-size: contain; background-color: none; background-repeat: no-repeat;"></div>
 				</div>
 				<div class="text-container">
 					<h3 class="text-primary">Harry Potter 4 <small>J.K. Rowling</small></h3>
@@ -36,7 +36,7 @@
 			</div><!-- /.bookitem -->
 			<div class="bookitem">
 				<div class="cover-container coverflow-item">
-					<div class="cover test-cover" style="background-image: url('./uploads/testimg/3.jpg');"></div>
+					<div class="cover test-cover" style="background-image: url('./res/img/white-t-shirt.svg'); background-size: contain; background-color: none; background-repeat: no-repeat;"></div>
 				</div>
 				<div class="text-container">
 					<h3 class="text-primary">The Secret Under my Skin <small>Janet McNaughton</small></h3>
@@ -47,7 +47,7 @@
 			</div><!-- /.bookitem -->
 			<div class="bookitem">
 				<div class="cover-container coverflow-item">
-					<div class="cover test-cover" style="background-image: url('./uploads/testimg/1.jpg');"></div>
+					<div class="cover test-cover" style="background-image: url('./res/img/white-t-shirt.svg'); background-size: contain; background-color: none; background-repeat: no-repeat;"></div>
 				</div>
 				<div class="text-container">
 					<h3 class="text-primary">Harry Potter 6 <small>J.K. Rowling</small></h3>
@@ -79,6 +79,22 @@ $bookitems = function($books) {
 	}
 };
 ?>
+
+<!-- SLIDER FOR TSHIRTS -->
+<div class="pagebox feature-pagebox">
+	<div class="title"><?php echo $item['title']; ?></div>
+
+	<div class="jq-page tshirt-canvas coverflow-canvas visible" data-name="featured">
+		<div class="canvas-slide prev"><span class="glyphicon glyphicon-chevron-left"></span></div>
+		<div class="canvas-slide next"><span class="glyphicon glyphicon-chevron-right"></span></div>
+		<div class="canvas-slide-under prev"><div class="artificial-padding"></div><?php bookitems(); ?><div class="artificial-padding"></div></div>
+		<div class="canvas-slide-under next"><div class="artificial-padding"></div><?php bookitems(); ?><div class="artificial-padding"></div></div>
+		<div class="books-container"><!-- wrapper required for scrolling to work -->
+			<?php bookitems(); ?>
+			<div class="artificial-padding"></div>
+		</div><!-- /.books-container -->
+	</div><!-- /.feature-canvas -->
+</div>
 
 <div class="pagebox feature-pagebox jq-tab-scope">
 	<ul class="nav nav-tabs feature-tabs">
@@ -254,7 +270,10 @@ if (isset($videovote_tmpl)) {
 				</div>
 			</div>
 		</div>
+
 	</div>
+
+
 <?php /*
 <div class="pagebox feature-pagebox">
 	<div class="title">Top books in Fiction</div>

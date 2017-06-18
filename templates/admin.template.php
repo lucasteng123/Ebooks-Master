@@ -121,6 +121,7 @@
 				<li data-page="emailout" class="jq-tab"><a href="#">Newsletter Mailout</a></li>
 				<li data-page="game" class="jq-tab"><a href="#">Game</a></li>
 				<li data-page="ebooks" class="jq-tab"><a href="#">/ebooks</a></li>
+				<li data-page="shirts" class="jq-tab"><a href="#">Shirts</a></li>
 				<?php if (in_array('admin.op',$_SESSION['permissions'])) { ?>
 				<li data-page="moderators" class="jq-tab"><a href="#">Moderators</a></li>
 				<?php } ?>
@@ -585,6 +586,22 @@
 			</div>
 
 
+<!--
+.______    __        ______     _______      ___
+|   _  \  |  |      /  __  \   /  _____|    /  /
+|  |_)  | |  |     |  |  |  | |  |  __     /  / 
+|   _  <  |  |     |  |  |  | |  | |_ |   /  /  
+|  |_)  | |  `----.|  `--'  | |  |__| |  /  /   
+|______/  |_______| \______/   \______| /__/    
+     _______. __    __   __  .______     .___________.    _______.
+    /       ||  |  |  | |  | |   _  \    |           |   /       |
+   |   (----`|  |__|  | |  | |  |_)  |   `---|  |----`  |   (----`
+    \   \    |   __   | |  | |      /        |  |        \   \    
+.----)   |   |  |  |  | |  | |  |\  \----.   |  |    .----)   |   
+|_______/    |__|  |__| |__| | _| `._____|   |__|    |_______/    
+-->                                                                  
+
+
 
 			<div class="jq-page admin-canvas" data-name="ebooks">
 				<form class="ajax-form blog-editor" data-name="ebooks_post">
@@ -617,6 +634,37 @@
 						<input name="update" type="submit" value="Post to Blog" class="btn btn-primary" />
 					</div>
 					<div class="col col-xs-9">
+						<span class="message"></span>
+					</div>
+					<div class="col col-xs-12 spacer"></div>
+				</form>
+			</div>
+
+
+			<div class="jq-page admin-canvas" data-name="shirts">
+				<form class="ajax-form blog-editor" data-name="tshirts_post">
+					<!-- FOR TSHIRT MODIFICATION, THIS FIELD WILL BE CHANGED BY JAVASCRIPT -->
+					<input name="postid" type="hidden" class="normal-input form-control" />
+					<div class="col col-xs-12">
+						<h1>Shirts</h1>
+					</div>
+					<div class="col col-sm-4">
+						<h3>Photo</h3>
+						<input class="file-input" name="post_image" type="file" />
+					</div>
+					<div class="col col-xs-8">
+						<h3>Name of Shirt</h3>
+						<input name="title" type="text" class="normal-input form-control" value="" />
+						<h3>Description of Shirt</h3>
+						<textarea name="contents" class="editor-area wide normal-input form-control"
+						STYLE="min-height: 20pt;"></textarea>
+					</div>
+					<div class="col col-sm-4">&nbsp;</div>
+					<div class="col col-sm-8">
+						<div class="spacer">&nbsp;</div>
+						<input name="update" type="submit" value="Add Shirt" class="btn btn-primary" />
+					</div>
+					<div class="col col-xs-12">
 						<span class="message"></span>
 					</div>
 					<div class="col col-xs-12 spacer"></div>

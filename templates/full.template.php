@@ -57,6 +57,7 @@ if (isset($title)) $pageTitle = $title . " | ".$pageTitle;
 		HtmlShortcuts::includeCSS($cssPath.'ebooks.css');
 		// CSS added on
 		HtmlShortcuts::includeCSS($cssPath.'guess_contest.css');
+		HtmlShortcuts::includeCSS($cssPath.'tshirt_sale.css');
 
 		// JS Classes
 		HtmlShortcuts::includeJS($scriptPath.'BlogComments.js');

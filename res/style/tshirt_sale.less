@@ -1,0 +1,76 @@
+@import (reference) "bookslist.less";
+
+.tshirt-canvas {
+	.feature-canvas;
+	margin: 0;
+	height: 80pt;
+	.canvas-slide {
+		line-height: 80pt;
+	}
+	.bookitem > .cover-container > .cover {
+		background: none;
+	}
+}
+
+.tshirt-sale-panel {
+	border: 1px solid #CCC;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	overflow: hidden;
+	.panel-heading {
+		background-color: #3377B3;
+		color: #EEE;
+		//border-bottom: 1px solid #999;
+	}
+}
+.tshirt-sale-box {
+	padding-top: 0;
+	padding-bottom: 0;
+
+	.part-for-form {
+		-webkit-box-shadow:inset 15px 0 20px -20px rgba(0,0,0,0.9);
+		box-shadow:inset 15px 0 20px -20px rgba(0,0,0,0.9);
+	}
+
+	.colour-button {
+		position: relative;
+		width: 20.7pt;
+		-webkit-transition: all 500ms ease;
+		-moz-transition: all 500ms ease;
+		-ms-transition: all 500ms ease;
+		-o-transition: all 500ms ease;
+		transition: all 500ms ease;
+		z-index: 1;
+		&:hover, &:focus {
+			z-index: 2;
+			transform: scale(1.3);
+			-webkit-transition: all 80ms ease;
+			-moz-transition: all 80ms ease;
+			-ms-transition: all 80ms ease;
+			-o-transition: all 80ms ease;
+			transition: all 80ms ease;
+		}
+	}
+
+	.offset-fix {
+		top: -4px;
+		margin-bottom: -4px;
+		padding: 15px;
+	}
+}
+
+.tee-canvas {
+	position: relative;
+	background-image: url('../img/white-t-shirt.svg');
+	background-size: cover;
+	.tee-image {
+		position: absolute;
+		top: 0;
+		left: 0;
+		padding: 20%;
+		padding-left:  30%;
+		padding-right: 30%;
+		width: 100%;
+		height: 100%;
+	}
+}

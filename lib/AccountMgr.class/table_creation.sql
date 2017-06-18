@@ -1,3 +1,6 @@
+-- Enable legacy zero-date defaults
+SET sql_mode = '';
+
 DROP TABLE IF EXISTS accountmgr_permissions;
 DROP TABLE IF EXISTS accountmgr_accounts;
 

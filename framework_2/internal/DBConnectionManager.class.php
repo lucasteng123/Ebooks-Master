@@ -21,14 +21,29 @@ class DBConnectionManager {
 		}
 		$this->config = $config;
 	}
+
+	function unset_sql_mode($con) {
+		$sql = "SET sql_mode = '';";
+		$stmt = $con->prepare($sql);
+		$stmt->execute();
+		if ($stmt->errorCode() != 0) {
+			$msg = $errors[2];
+			trigger_error("Failed to unset sql mode: ".var_dump($errors));
+		}
+	}
+
 	function getError() {
 		return $this->lastException;
 	}
 	function get_connection() {
-		if ($this->con instanceof PDO) return $this->con;
+		if ($this->con instanceof PDO) {
+			// $this->unset_sql_mode($this->con);
+			return $this->con;
+		}
 
 		try {
 			$this->con = $this->connect();
+			$this->unset_sql_mode($this->con);
 			return $this->con;
 		} catch (PDOException $e) {
 			$this->lastException = $e; //catch and show the error

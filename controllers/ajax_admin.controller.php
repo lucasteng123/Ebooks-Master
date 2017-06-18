@@ -54,6 +54,7 @@ $methods['run'] = function($instance) {
 		$con = $instance->tools['con_manager']->get_connection();
 		$sitedb = new SiteDB($con);
 		$eblog = new EbooksBlogMgr($con);
+		$eshrt = new ShirtMgr($con);
 		$imgdb = new ImageDB($con);
 		$ss = new SiteStrings($con);
 		$gc = new GuessContest($con);
@@ -319,6 +320,17 @@ $methods['run'] = function($instance) {
 
 				$json['status'] = "good";
 				$json['message'] = "This post was posted to the /ebooks blog!";
+				ob_clean();
+				echo json_encode($json);
+			}
+			else if ($r[0] == "tshirts_post") {
+				$title    = $_POST['title'];
+				$contents = $_POST['contents'];
+				$imageID  = $imgdb->add_from_post_request('post_image',"Post Image");
+				$eshrt->insert_tshirt($title, $contents, $imageID);
+
+				$json['status'] = "good";
+				$json['message'] = "This shirt was added to the tshirts list!";
 				ob_clean();
 				echo json_encode($json);
 			}
