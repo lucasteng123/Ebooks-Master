@@ -1,0 +1,19 @@
+ 
+=== BestEbooks.ca Planning ===
+
+Create ebooks_single template for ebooks blog
+
+Write controller to choose a template
+
+Fill in template contents based on controller vars
+
+Make sure commenting works in JavaScript still
+
+Add list to approval page controller
+ -> show in template
+
+Add javascript to ajax_admin controller to handle comment approval
+
+Done
+
+Add check for if post needs approval in BlogComments.js

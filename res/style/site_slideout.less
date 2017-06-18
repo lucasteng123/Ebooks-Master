@@ -1,0 +1,214 @@
+.animate-swift {
+  -webkit-transition: all 400ms ease;
+  -moz-transition: all 400ms ease;
+  -ms-transition: all 400ms ease;
+  -o-transition: all 400ms ease;
+  transition: all 400ms ease;
+}
+
+#SITE_SLIDEOUT {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+
+	#login_to_submit {
+		display: none;
+		width: 100%;
+		line-height: 20pt;
+		font-size: 10pt;
+		font-weight: strong;
+		text-align: center;
+		color: #ec971f;
+		margin-top: 15px;
+		margin-bottom: -20px;
+		.line1 {
+			font-size: 12pt;
+		}
+		&.visible {
+			display: inline-block;
+		}
+	}
+
+	.pseudo-input {
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		-o-user-select: none;
+		user-select: none;
+		outline: none;
+		pointer-events: none;
+
+		background-color: #FFF;
+	}
+
+
+	.slideout-box-col {
+		position: relative;
+	}
+	.slideout-box { z-index: 999;
+		text-align: left;
+		position: relative;
+		width: 100%;
+		max-height: 0px;
+
+		.animate-swift;
+
+		overflow: hidden;
+
+		background-color: #EEE;
+
+		-webkit-box-shadow: 0 0 8px 0 #2B2B2B;
+		box-shadow: 0 0 8px 0 #2B2B2B;
+
+		&.visible {
+			max-height: 1200px; // TEMP
+		}
+
+		.padding {
+			display: block;
+			height: 8pt;
+		}
+
+		.btn.otherside {
+			float: right;
+		}
+
+		.form-group.related-to-below {
+			margin-bottom: 0;
+		}
+		.form-group {
+			.help-block {
+				margin-bottom: 0;
+			}
+			.progress-under-button {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				border-radius: 4px;
+			}
+			.file-upload-button {
+				border-radius: 4px;
+				&.processing {
+					background: none;
+					border-radius: 4px;
+				}
+			}
+		}
+
+		.related-fields {
+			.form-group {
+				margin-bottom: 0;
+			}
+			input {
+				border-bottom-left-radius: 0;
+				border-bottom-right-radius: 0;
+				border-top-left-radius: 0;
+				border-top-right-radius: 0;
+			}
+			.form-group:first-of-type {
+				input {
+					border-top-left-radius: 4px;
+					border-top-right-radius: 4px;
+				}
+			}
+			.form-group:last-of-type {
+				margin-bottom: 15px;
+				input {
+					border-bottom-left-radius: 4px;
+					border-bottom-right-radius: 4px;
+				}
+			}
+		}
+
+		.blurb {
+			width: 100%;
+			text-align: justify;
+			background-color: #F1F1D4;
+			padding: 15px;
+			margin-bottom: 15px;
+			-webkit-box-shadow: 4px 4px 8px 0 rgba(0,0,0,0.6);
+box-shadow: 4px 4px 8px 0 rgba(0,0,0,0.6);
+		}
+
+		textarea {
+			resize: vertical;
+			max-height: 156px;
+		}
+	}
+	@login_tabs_height: 20pt;
+	.loginregbox {
+		display: block;
+		width: 100%;
+		.tab {
+			display: inline-block;
+			float: left;
+			width: 50%;
+			height: @login_tabs_height;
+			font-size: 12pt;
+			text-align: center;
+			background-color: #777;
+			color: #fff;
+
+			cursor: pointer;
+
+			.animate-swift;
+
+			-webkit-box-shadow: inset 0px 7pt 20px 0px rgba(0,0,0,0.3);
+			-moz-box-shadow: inset 0px 7pt 20px 0px rgba(0,0,0,0.3);
+			box-shadow: inset 0px 7pt 20px 0px rgba(0,0,0,0.3);
+
+			&:hover {
+				background-color: #999;
+				-webkit-box-shadow: inset 0px 5px 10px -8px rgba(0,0,0,0.75);
+				-moz-box-shadow: inset 0px 5px 10px -8px rgba(0,0,0,0.75);
+				box-shadow: inset 0px 5px 10px -8px rgba(0,0,0,0.75);
+			}
+			&.selected {
+				color: #333;
+				background: none;
+				-webkit-box-shadow: none;
+				-moz-box-shadow: none;
+				box-shadow: none;
+			}
+		}
+	}
+	form.padded {
+		padding: 15px;
+		margin-top: @login_tabs_height;
+	}
+	form.padded-ex-bottom {
+		padding-bottom: 0;
+	}
+	.hiddenform {
+		display: none;
+	}
+	.hiddenform.visible {
+		display: block;
+	}
+	.error-message {
+		display: none;
+		color: #C00;
+		text-align: left;
+		margin-top: -5px;
+		margin-bottom: 10px;
+	}
+	.success-message {
+		display: none;
+		color: #0C0;
+		text-align: left;
+		margin-top: -5px;
+		margin-bottom: 10px;
+		.timer {
+			font-weight: bold;
+			color: #00C;
+		}
+	}
+	.forgot-message {
+		display: none;
+		color: #C70;
+		text-align: left;
+		margin-top: -5px;
+		margin-bottom: 10px;
+	}
+}

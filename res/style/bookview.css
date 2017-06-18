@@ -1,0 +1,105 @@
+.bookview .user-controls {
+  display: inline-block;
+  width: 100%;
+  background-color: #DDD;
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1px solid #BBB;
+}
+.bookview .user-controls form {
+  display: inline-block;
+  width: 200px;
+}
+.bookview .user-controls span {
+  display: inline-block;
+}
+.bookview .admin-coloured {
+  background-color: #CCE;
+  border: 2px solid #000;
+}
+.bookview .adminfo {
+  background-color: #CCE;
+  display: inline-block;
+  width: 100%;
+  border: 2px solid #000;
+  padding: 15px;
+  margin-bottom: 15px;
+  line-height: 24px;
+}
+.bookview .adminfo tr td:first-of-type {
+  padding-right: 15px;
+}
+.bookview .adminfo table.outer_table > tbody > tr {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+.bookview .adminfo table.outer_table td {
+  vertical-align: top;
+}
+.bookview .adminfo .input-xs[type=text] {
+  height: 22px;
+  font-size: 12px;
+  line-height: 22px;
+  vertical-align: middle;
+}
+.bookview .rating {
+  line-height: 42px;
+}
+.bookview .spacer {
+  display: block;
+  height: 15px;
+  width: 100%;
+}
+.bookview .spacer-3rd {
+  display: block;
+  height: 5px;
+  width: 100%;
+}
+.bookview .cover-column {
+  display: inline-block;
+}
+.bookview .cover-column .cover-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  background-color: #fff;
+  overflow: hidden;
+}
+.bookview .cover-column .cover-container .cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.bookview .cover-column .cover-container .cover-highlight {
+  position: relative;
+  width: 100%;
+}
+.bookview .cover-column .price {
+  width: 100%;
+  line-height: 24px;
+  text-align: center;
+  color: #0A0;
+}
+.bookview .description-column {
+  max-width: 400pt;
+  min-height: 300px;
+  line-height: 16pt;
+  font-size: 10pt;
+}
+.bookview hr {
+  border: 0;
+  border-bottom: 1px solid #CCC;
+  width: 100%;
+}
+.bookview .media-div {
+  width: 100%;
+}
+.bookview .media-div .video-canvas {
+  height: 160pt;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  text-align: center;
+}
+.bookview .media-div .video {
+  height: 160pt;
+}

@@ -1,0 +1,171 @@
+.admin-canvas {
+	position: relative;
+	display: none;
+
+	@canvas-border-col: #FFF;
+
+	width: 100%;
+	background-color: #FFF;
+	border-top: 1px solid @canvas-border-col;
+	border-bottom: 1px solid @canvas-border-col;
+
+	padding: 15px 0;
+	margin-bottom: 10pt;
+
+	text-align: left;
+
+	-webkit-box-shadow: 0 0 8px 0 rgba(0,0,0,0.6);
+	box-shadow: 0 0 8px 0 rgba(0,0,0,0.6);
+
+	&.visible {
+		display: inline-block;
+	}
+
+	.spacer {
+		width: 100%;
+		height: 15px;
+	}
+
+	form {
+		.message {
+			display: none;
+			width: 100%;
+			line-height: 24px;
+			font-size: 12px;
+			padding: 0 12px;
+			margin-top: 5px;
+			&.bad, &.error {
+				background-color: #FCC;
+				color: #333;
+			}
+			&.good, &.okay {
+				background-color: #CFC;
+				color: #333;
+			}
+			&.visible {
+				display: inline-block;
+			}
+		}
+	}
+
+	.subcat-container {
+		position: relative;
+		padding-left: 15px;
+		.inner {
+			display: inline-block;
+			width: 100%;
+			border-left: 5px solid #CCC;
+			padding-left: 10px;
+		}
+	}
+
+	textarea {
+		resize: vertical;
+
+		&.wide {
+			// -webkit-column-count: 3;
+			// -moz-column-count: 3;
+			// column-count: 3;
+			min-height: 200pt;
+			overflow: auto;
+		}
+	}
+}
+
+.blog-editor {
+	.editor-buttons {
+		margin-bottom: 0;
+		border-bottom: 0;
+		&, & .panel-body {
+			@padd: 2pt;
+			padding: @padd;
+			-webkit-border-radius: 4px 4px 0 0;
+			border-radius: 4px 4px 0 0;
+		}
+	}
+	.editor-area {
+		-webkit-border-radius: 0 0 4px 4px;
+		border-radius: 0 0 4px 4px;
+	}
+}
+
+#LPP-booksmod, #LPP-vidsmod {
+	.resize_spacing {
+		height: 100%;
+	}
+	.ajax-console {
+		margin-bottom: 15px;
+		background-color: #FFF;
+		padding: 15px 15px;
+		.green {
+			color: #0A0;
+		}
+		.red {
+			color: #A00;
+		}
+	}
+	.bookitem {
+		display: inline-block;
+		position: relative;
+		width: 100%;
+		margin-bottom: 15px;
+		&.dispnone {
+			display: none;
+		}
+		&.approved {
+			background-color: #DFD;
+		}
+		&:hover {
+			background-color: #FFF;
+		}
+		.cover-container {
+			display: inline-block;
+			float: left;
+			width: 60px;
+
+			margin-right: 15px;
+
+			img {
+				width: 100%;
+			}
+		}
+		.text-container {
+			display: block;
+			padding-left: 75px;
+		}
+		.title {
+			font-size: 14pt;
+			font-weight: strong;
+			line-height: 14pt;
+			height: 20pt;
+		}
+		.faded {
+			color: #777;
+		}
+		textarea {
+			resize: vertical;
+			width: 100%;
+			height: auto;
+			margin-bottom: 10px;
+		}
+		table {
+			width: 100%;
+			margin-bottom: 10px;
+			border: 2px solid #CCC;
+			td {
+				padding: 4px;
+				border-bottom: 1px solid #CCC;
+			}
+			tr:last-of-type td {
+				border-bottom: none;
+			}
+			.prop {
+				width: 100px;
+				background-color: #CCC;
+			}
+			.valu {
+				background-color: #FFF;
+			}
+		}
+	}
+}

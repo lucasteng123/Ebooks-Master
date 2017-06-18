@@ -1,0 +1,134 @@
+.guess-contest-panel {
+	border: 1px solid #CCC;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	overflow: hidden;
+	.panel-heading {
+		background-color: #B73333;
+		color: #EEE;
+		//border-bottom: 1px solid #999;
+	}
+}
+.guess-contest-box {
+	position: relative;
+	//@description-background: #ffffcc;
+	@description-background: #f7f7f7;
+
+	.letter-boxes-holder {
+		display: inline-block;
+		width: 100%;
+		text-align: center;
+		margin-bottom: 15px;
+		&.guessing .letter-box {
+			color: #CCC;
+		}
+	}
+	.inputs-holder {
+		text-align: center;
+	}
+	.description-holder {
+		text-align: center;
+		& > .inner {
+			display: inline-block;
+			margin: 5px;
+			margin-top: 0;
+			padding: 5px;
+			background-color: @description-background;
+			border: 1px solid #ddd;
+			-webkit-border-radius: 8px;
+			border-radius: 8px;
+		}
+
+	}
+	.question-holder {
+		color: #555;
+		text-align: center;
+		margin-bottom: 10px;
+	}
+	.letter-box {
+		display: inline-block;
+		width: 40px;
+		height: 40px;
+		line-height: 40px;
+		vertical-align: top;
+		@border-thin: 1px solid #CCC;
+		@border-thick: 2px solid #AAA;
+		border-top: @border-thin;
+		border-left: @border-thin;
+		border-bottom: @border-thick;
+		border-right: @border-thick;
+
+		font-family: sans-serif;
+		font-weight: bold;
+	}
+	.winners-prize {
+		text-align: center;
+	}
+	.winners-col {
+		position: relative;
+		z-index: 2;
+		.container-fluid {
+			margin: -15px;
+			margin-bottom: 15px;
+		}
+		.embed-responsive-fish {
+			position: absolute;
+			width: 100%;
+		}
+		.winners-roll {
+			margin-top: 15px;
+			max-height: 60px;
+			overflow-y: auto;
+		}
+	}
+	.winners-col-placeholder {
+		position: absolute;
+		z-index: 1;
+		top: 0;
+		right: 15px;
+		padding-top: 15px;
+
+		height: 100%;
+		background-color: @description-background;
+		border-left: 1px solid #ccc;
+	}
+	.description-col {
+		position: absolute;
+		top: 0;
+		padding-top: 15px;
+		border-right: 1px solid #ccc;
+		height: 100%;
+		background-color: @description-background;
+	}
+	.money-tiles {
+		@border-thin: 1px solid #CCC;
+		@border-thick: 2px solid #AAA;
+		@background: none;
+		/*
+		@border-thin: 1px solid #339900;
+		@border-thick: 2px solid #339900;
+		@background: #55CC00;
+		*/
+
+		display: inline-block;
+		.tile {
+			display: inline-block;
+			margin: 0;
+			font-size: 18px;
+			width: 20px;
+			height: 40px;
+			line-height: 40px;
+			text-align: center;
+			border-top: @border-thin;
+			border-left: @border-thin;
+			border-bottom: @border-thin;
+			background-color: @background;
+			&:last-of-type {
+				border-right: @border-thin;
+			}
+		}
+
+		-webkit-box-shadow: 2px 2px 4px 0 rgba(0,0,0,0.3);
+		box-shadow: 2px 2px 4px 0 rgba(0,0,0,0.3);
+	}
+}

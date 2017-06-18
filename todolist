@@ -1,0 +1,23 @@
+[done] setup_videovote_template needs to do a check if base category exists.
+~~~ Remaining on Website ~~~
+[done] -> Category field needs to be added to book form
+ -> Book links need to direct to book page
+ -> Book covers in list should each have their own vanishing point
+ -> Social media buttons (this will be easy)
+ -> Searchbox needs to work
+ -> Sort buttons need to work (this could be hard)
+ -> Decide whether or not to make ISBN optional
+[80%] -> Videovote needs to be implemented
+~~~ Extras if today's work is finished ~~~
+ -> Implement site strings
+~~~ Possible Extras ~~~
+ -> Make sure book editing can be done
+ -> Convert current one-to-many relationship (categories-books) with many-to-many
+ -> Multiple links for a particular book
+
+=== FOR VIDEO VOTES -> NEXT STEPS ===
+ -> add functionality to get amount of votes for basecat
+ -> add functionality to get 'left' or 'right' from accid and baseid
+ -> add functionality to remove votes where baseid=x when setting new videos
+ -> add controller function for clicking vote and receiving results
+ -> EST TIME: 1 HOUR

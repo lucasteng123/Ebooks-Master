@@ -1,0 +1,205 @@
+function reload_with_timer(timer_obj) {
+	newTime = timer_obj.data('time') - 1;
+	timer_obj.data('time',newTime);
+	timer_obj.html(newTime);
+	if (newTime == 0) {
+		location.reload();
+	}
+}
+
+function set_ajax_submits() {
+	
+	function regular_submit(e, obj, url) {
+		var finished = function (message, status) {
+			var messageObj = $(obj).closest('form').find('.message').first();
+			console.log('|'+status+'|');
+			if (status == "good") {
+				message += ' Reloading in <span class="timer" data-time="5">5</span>...';
+			}
+			messageObj.html(message);
+			messageObj.addClass('visible');
+			messageObj.addClass(status);
+			if (status == "good") {
+				setInterval(function () {
+					reload_with_timer(messageObj.find('.timer').first());
+				}, 500)
+			}
+		};
+		var jqxhr = $.ajax({
+			type: "POST",
+			url: url,
+			data: $(obj).serialize(), // serializes the form's elements.
+			dataType: "json"
+		});
+		jqxhr.done(function (data) {
+			finished(data.message,data.status);
+		});
+		jqxhr.fail(function (data) {
+			finished("Server error encountered!","bad");
+		});
+		e.stopPropagation();
+	    e.preventDefault();
+	}
+	
+	$('.ajax-form').each(function (i, obj) {
+		if ($(obj).data('name') == "ticker") {
+			var finished = function (message, status) {
+				var messageObj = $(obj).closest('form').find('.message').first();
+				if (status == "good") {
+					message += ' <span class="timer">3</span>';
+				}
+				messageObj.html(message);
+				messageObj.addClass('visible');
+				messageObj.addClass(status);
+				if (status == "good") {
+					reload_with_timer(messageObj.find('.timer').first());
+				}
+			};
+			$(obj).submit(function(e) {
+				var url = "index.php?location=ajax_admin/ticker"; // the script where you handle the form input.
+				var jqxhr = $.ajax({
+					type: "POST",
+					url: url,
+					data: $(this).serialize(), // serializes the form's elements.
+					dataType: "json"
+				});
+				jqxhr.done(function (data) {
+					finished(data.message,data.status);
+				});
+				jqxhr.fail(function (data) {
+					finished("Server error encountered!","bad");
+				});
+				e.stopPropagation();
+			    e.preventDefault();
+			});
+		} else if ($(obj).data('name') == "category") {
+			var finished = function (message, status) {
+				var messageObj = $(obj).closest('form').find('.message').first();
+				messageObj.html(message);
+				messageObj.addClass('visible');
+				messageObj.addClass(status);
+			};
+			$(obj).submit(function(e) {
+				var url = "index.php?location=ajax_admin/categories"; // the script where you handle the form input.
+				var jqxhr = $.ajax({
+					type: "POST",
+					url: url,
+					data: $(this).serialize(), // serializes the form's elements.
+					dataType: "json"
+				});
+				jqxhr.done(function (data) {
+					finished(data.message,data.status);
+				});
+				jqxhr.fail(function (data) {
+					finished("Server error encountered!","bad");
+				});
+				e.stopPropagation();
+			    e.preventDefault();
+			});
+		} else if ($(obj).data('name') == "subcat") {
+			/*
+			var finished = function (message, status) {
+				var messageObj = $(obj).closest('form').find('.message').first();
+				messageObj.html(message);
+				messageObj.addClass('visible');
+				messageObj.addClass(status);
+			};
+			*/
+			$(obj).submit(function(e) {
+				regular_submit(e,obj,"index.php?location=ajax_admin/subcats");
+				/*
+				var url = "index.php?location=ajax_admin/subcats"; // the script where you handle the form input.
+				var jqxhr = $.ajax({
+					type: "POST",
+					url: url,
+					data: $(this).serialize(), // serializes the form's elements.
+					dataType: "json"
+				});
+				jqxhr.done(function (data) {
+					finished(data.message,data.status);
+				});
+				jqxhr.fail(function (data) {
+					finished("Server error encountered!","bad");
+				});
+				e.stopPropagation();
+			    e.preventDefault();
+			    */
+			});
+		}
+	});
+	$('input[type=submit]').each(function (i, obj) {
+		$(obj).click(function () {
+			$(obj).closest('form').find('input[name=submitted]').val($(obj).attr('name'));
+		});
+	});
+}
+
+function activate_tabs(selector) {
+	$('.jq-tab').each(function (i, link) {
+		var pageName = $(link).data('page');
+		$(link).click(function(e) {
+			$(selector).find('.jq-tab').each(function (k, tab) {
+				$(tab).removeClass('active');
+			});
+			$(link).addClass('active');
+			// Activate the correct page
+			$(selector).find('.jq-page').each(function (j, page) {
+				console.log("Name: "+$(page).data('name'));
+				if ($(page).data('name') == pageName) {
+					$(page).addClass('visible');
+				} else {
+					$(page).removeClass('visible');
+				}
+			});
+		});
+	});
+}
+
+function activate_sidelinks() {
+	$('.ajax-tab').each(function (i, obj) {
+		$(this).click(function(e) {
+			var page = $(this).data('page');
+			if (page == "adminbox") {
+				$('.loadable-page-part').each(function (j, pagepart) {
+					$(pagepart).addClass('dispnone');
+				});
+				$("#LPP-adminbox").removeClass('dispnone');
+			}
+			else if (page == "booksmod") {
+				$('.loadable-page-part').each(function (j, pagepart) {
+					$(pagepart).addClass('dispnone');
+				});
+				$("#LPP-booksmod").removeClass('dispnone');
+			}
+		});
+	});
+}
+
+function activate_book_buttons() {
+	$('.approval-buttons button').each(function (i, obj) {
+		$(obj).click(function () {
+			var finished = function (message,status) {
+				alert(status+": "+message);
+			};
+			var name = $(obj).data('name');
+			var id = $(obj).closest('.approval-buttons').data('id');
+			if (name == "approve" || name == "decline") {
+				var url = "index.php?location=ajax_approval/"+name+'/'+id; // the script where you handle the form input.
+				var jqxhr = $.ajax({
+					type: "POST",
+					url: url,
+					data: $(this).serialize(), // serializes the form's elements.
+					dataType: "json"
+				});
+				jqxhr.done(function (data) {
+					finished(data.message,data.status);
+				});
+				jqxhr.fail(function (data) {
+					finished("Server error encountered!","bad");
+				});
+			} else {
+				alert('This has not been implemented yet, '+name);
+			}
+		});
+	});
+}

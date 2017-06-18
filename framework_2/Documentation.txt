@@ -1,0 +1,7 @@
+class Router:
+	set_route_from_request(String request, Boolean setNullToIndex = true)
+		Sets the routers path array to match that of the given request string.
+		If setNullToIndex is not set, or set to true, "/" will become "/index"
+	get_controller(String[] controllerPaths)
+		Attempts to load a controller in one of the given folders based on
+		the request string set by set_route_from_request

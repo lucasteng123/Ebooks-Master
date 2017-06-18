@@ -1,0 +1,13 @@
+RewriteEngine on
+
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+
+# Rewrites for pages
+# QSA Flag: merges client's querystring with the one generated
+# L: Stop processing if rule is used
+RewriteRule ^ebooks$ index.php?location=ebooks [L,QSA]
+RewriteRule ^ebooks/(.*) index.php?location=ebooks/$1 [L,QSA]
+RewriteRule ^book/(.*) index.php?location=book/$1 [L,QSA]
+
+#RewriteRule ^([a-zA-Z0-9_-/]+)$ index.php?location=$1 [L,QSA]

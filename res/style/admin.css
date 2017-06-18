@@ -1,0 +1,167 @@
+.admin-canvas {
+  position: relative;
+  display: none;
+  width: 100%;
+  background-color: #FFF;
+  border-top: 1px solid #ffffff;
+  border-bottom: 1px solid #ffffff;
+  padding: 15px 0;
+  margin-bottom: 10pt;
+  text-align: left;
+  -webkit-box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.6);
+}
+.admin-canvas.visible {
+  display: inline-block;
+}
+.admin-canvas .spacer {
+  width: 100%;
+  height: 15px;
+}
+.admin-canvas form .message {
+  display: none;
+  width: 100%;
+  line-height: 24px;
+  font-size: 12px;
+  padding: 0 12px;
+  margin-top: 5px;
+}
+.admin-canvas form .message.bad,
+.admin-canvas form .message.error {
+  background-color: #FCC;
+  color: #333;
+}
+.admin-canvas form .message.good,
+.admin-canvas form .message.okay {
+  background-color: #CFC;
+  color: #333;
+}
+.admin-canvas form .message.visible {
+  display: inline-block;
+}
+.admin-canvas .subcat-container {
+  position: relative;
+  padding-left: 15px;
+}
+.admin-canvas .subcat-container .inner {
+  display: inline-block;
+  width: 100%;
+  border-left: 5px solid #CCC;
+  padding-left: 10px;
+}
+.admin-canvas textarea {
+  resize: vertical;
+}
+.admin-canvas textarea.wide {
+  min-height: 200pt;
+  overflow: auto;
+}
+.blog-editor .editor-buttons {
+  margin-bottom: 0;
+  border-bottom: 0;
+}
+.blog-editor .editor-buttons,
+.blog-editor .editor-buttons .panel-body {
+  padding: 2pt;
+  -webkit-border-radius: 4px 4px 0 0;
+  border-radius: 4px 4px 0 0;
+}
+.blog-editor .editor-area {
+  -webkit-border-radius: 0 0 4px 4px;
+  border-radius: 0 0 4px 4px;
+}
+#LPP-booksmod .resize_spacing,
+#LPP-vidsmod .resize_spacing {
+  height: 100%;
+}
+#LPP-booksmod .ajax-console,
+#LPP-vidsmod .ajax-console {
+  margin-bottom: 15px;
+  background-color: #FFF;
+  padding: 15px 15px;
+}
+#LPP-booksmod .ajax-console .green,
+#LPP-vidsmod .ajax-console .green {
+  color: #0A0;
+}
+#LPP-booksmod .ajax-console .red,
+#LPP-vidsmod .ajax-console .red {
+  color: #A00;
+}
+#LPP-booksmod .bookitem,
+#LPP-vidsmod .bookitem {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  margin-bottom: 15px;
+}
+#LPP-booksmod .bookitem.dispnone,
+#LPP-vidsmod .bookitem.dispnone {
+  display: none;
+}
+#LPP-booksmod .bookitem.approved,
+#LPP-vidsmod .bookitem.approved {
+  background-color: #DFD;
+}
+#LPP-booksmod .bookitem:hover,
+#LPP-vidsmod .bookitem:hover {
+  background-color: #FFF;
+}
+#LPP-booksmod .bookitem .cover-container,
+#LPP-vidsmod .bookitem .cover-container {
+  display: inline-block;
+  float: left;
+  width: 60px;
+  margin-right: 15px;
+}
+#LPP-booksmod .bookitem .cover-container img,
+#LPP-vidsmod .bookitem .cover-container img {
+  width: 100%;
+}
+#LPP-booksmod .bookitem .text-container,
+#LPP-vidsmod .bookitem .text-container {
+  display: block;
+  padding-left: 75px;
+}
+#LPP-booksmod .bookitem .title,
+#LPP-vidsmod .bookitem .title {
+  font-size: 14pt;
+  font-weight: strong;
+  line-height: 14pt;
+  height: 20pt;
+}
+#LPP-booksmod .bookitem .faded,
+#LPP-vidsmod .bookitem .faded {
+  color: #777;
+}
+#LPP-booksmod .bookitem textarea,
+#LPP-vidsmod .bookitem textarea {
+  resize: vertical;
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+#LPP-booksmod .bookitem table,
+#LPP-vidsmod .bookitem table {
+  width: 100%;
+  margin-bottom: 10px;
+  border: 2px solid #CCC;
+}
+#LPP-booksmod .bookitem table td,
+#LPP-vidsmod .bookitem table td {
+  padding: 4px;
+  border-bottom: 1px solid #CCC;
+}
+#LPP-booksmod .bookitem table tr:last-of-type td,
+#LPP-vidsmod .bookitem table tr:last-of-type td {
+  border-bottom: none;
+}
+#LPP-booksmod .bookitem table .prop,
+#LPP-vidsmod .bookitem table .prop {
+  width: 100px;
+  background-color: #CCC;
+}
+#LPP-booksmod .bookitem table .valu,
+#LPP-vidsmod .bookitem table .valu {
+  background-color: #FFF;
+}

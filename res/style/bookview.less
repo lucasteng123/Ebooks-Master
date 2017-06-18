@@ -1,0 +1,116 @@
+.bookview {
+	.user-controls {
+		display: inline-block;
+		width: 100%;
+		background-color: #DDD;
+		padding: 15px;
+		margin-bottom: 15px;
+		border: 1px solid #BBB;
+		form {
+			display: inline-block;
+			width: 200px;
+		}
+		span {
+			display: inline-block;
+		}
+	}
+	.admin-coloured {
+		background-color: #CCE;
+		border: 2px solid #000;
+	}
+	.adminfo {
+		.admin-coloured;
+		display: inline-block;
+		width: 100%;
+		border: 2px solid #000;
+		padding: 15px;
+		margin-bottom: 15px;
+		line-height: 24px;
+		tr td:first-of-type {
+			padding-right: 15px;
+		}
+		table.outer_table {
+			& > tbody > tr {
+				border-top: 1px solid rgba(0,0,0,0.1);
+			}
+			td {
+				vertical-align: top;
+			}
+		}
+		.input-xs[type=text] {
+			height: 22px;
+			font-size: 12px;
+			line-height: 22px;
+			vertical-align: middle;
+		}
+	}
+	.title {
+	}
+	.rating {
+		line-height: 42px;
+	}
+	.spacer {
+		display: block;
+		height: 15px;
+		width: 100%;
+	}
+	.spacer-3rd {
+		display: block;
+		height: 5px;
+		width: 100%;
+	}
+	.cover-column {
+		display: inline-block;
+		.cover-container {
+			position: relative;
+			display: inline-block;
+			width: 100%;
+			background-color: #fff;
+			overflow: hidden;
+			.cover {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+			}
+			.cover-highlight {
+				position: relative;
+				width: 100%;
+			}
+		}
+		.price {
+			width: 100%;
+			line-height: 24px;
+			text-align: center;
+			color: #0A0;
+		}
+	}
+	.description-column {
+		max-width: 400pt;
+		min-height: 300px;
+		line-height: 16pt;
+		font-size: 10pt;
+	}
+	hr {
+		border: 0;
+		border-bottom: 1px solid #CCC;
+		width: 100%;
+	}
+	.media-div {
+		width: 100%;
+		// border-top: 1px solid #CCC;
+
+		@video-height: 160pt;
+
+		.video-canvas {
+			height: @video-height;
+			width: 100%;
+			// background-color: #000;
+			background-color: rgba(0,0,0,0.7);
+			text-align: center;
+		}
+		.video {
+			height: @video-height;
+		}
+	}
+}
