@@ -1,4 +1,8 @@
 <?php
+
+session_start();
+require_once(SITE_PATH.'/scripts/setup_full_template.php');
+
 $methods = array();
 
 $methods[ 'error' ] = function ( $instance ) {
@@ -6,6 +10,14 @@ $methods[ 'error' ] = function ( $instance ) {
 };
 
 $methods[ 'run' ] = function ( $instance ) {
+	// Setup site template
+	$con = $instance->tools['con_manager']->get_connection();
+	$sitedb = new SiteDB($con);
+	$ss = new SiteStrings($con);
+	$html = new Template();
+	$html->set_template_file(SITE_PATH.'/templates/full.template.php');
+	setup_full_template($html, $sitedb, $ss, $_SESSION);
+
 	$tshirtID = 0;
 	// Get tools
 	$pdo = $instance->tools[ 'con_manager' ]->get_connection();
@@ -31,62 +43,12 @@ $methods[ 'run' ] = function ( $instance ) {
 			$tshirt = $result[ 0 ];
 			$colors = explode( ",", $tshirt[ "colors" ] );
 
-			echo( '<!DOCTYPE html>
-<html>
-<head>
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="tshirts.css">
-	<title>T-Shirt Update</title>
-</head>
-<body>
-<div class="container">
-	<div class="row">
-		<h1>' . $tshirt[ "name" ] . '</h1>
-		<hr>
-	</div>
+			$tmpl = new Template();
+			$tmpl->set_template_file(SITE_PATH . "/templates/tshirt_details.template.php");
 
-	<div class="row">
-		<div class="col-md-7">
-			<img src = "' . $tshirt[ "image" ] . '" class="img-thumbnail" />
-		</div>
-		<div class="col-md-5">
-			<h2>Order this shirt</h2>
-			<hr>
-			<h3><strong>$' . $tshirt[ "price" ] . '</strong><span style="font-weight: 200">/shirt</span></h3>
-			<form action="/order/place/' . $id . '" method="post">
-				<div class="form-group">
-					<label for="quantity"> Quantity </label>
-					<input type="text" class="form-control" name="quantity">
-				</div>
-				<h4>Please choose colour</h4><div class="col-md-12">' );
-			foreach ( $colors as $color ) {
-				echo( '
-				<div class="form-group col-md-2" style="text-align:center; padding:0px 10px; background-color: ' . $color . ';">
-					<input type="radio" class="form-control" style="display: inline-block;" value="' . $color . '" name="colors">
-				</div>' );
-			}
-			echo( '
-				
-				</div>
-				<div class="form-group">
-					<label for="email"> Email Address </label>
-					<input type="text" class="form-control" name="email">
-				</div>
-				
-				<div class="form-group">
-					<input class="btn btn-primary" type="submit">
-				</div>
-			</form>	
+			$html->part_bookview = $tmpl;
+			$html->run();
 
-		</div>
-	</div>
-
-	
-
-		
-</div>
-</body>
-</html>' );
 			break;
 		case "place":
 			//get POST variables
