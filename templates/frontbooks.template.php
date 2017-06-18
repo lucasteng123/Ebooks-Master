@@ -167,6 +167,8 @@ if (isset($videovote_tmpl)) {
 	</div><!-- /.pagebox -->
 <?php } ?>
 
+<?php $tshirts->run(); ?>
+
 	<div class="panel panel-default guess-contest-panel" id="guess_contest_container">
 		<div class="panel-heading">
 			<div class="panel-title">

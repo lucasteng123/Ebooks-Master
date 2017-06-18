@@ -18,6 +18,7 @@ $methods['run'] = function($instance) {
 	$gc = new GuessContest($con);
 	$bookLister = new BookLister($con);
 	$bookLister->set_result_limit(15);
+	$shirts = new ShirtMgr($con);
 
 	// Generate topbooks template
 	$topbooks_tmpl = new Template();
@@ -50,6 +51,14 @@ $methods['run'] = function($instance) {
 				$videovote_tmpl->base_category = "";
 			}
 			$topbooks_tmpl->videovote_tmpl = $videovote_tmpl;
+		}
+
+		{
+			$result = $shirts->get_tshirt_list();
+			$shirts_tmpl = new Template();
+			$shirts_tmpl->set_template_file(SITE_PATH . '/templates/tshirts.template.php');
+			$shirts_tmpl->tshirts = $result;
+			$topbooks_tmpl->tshirts = $shirts_tmpl;
 		}
 
 		setup_frontbooks_template($topbooks_tmpl, $con, $sitedb, $bookLister, $query_array);
