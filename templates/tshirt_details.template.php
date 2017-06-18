@@ -14,10 +14,6 @@ echo('
 			
 			<h3><strong>$' . $tshirt[ "price" ] . '</strong><span style="font-weight: 200">/shirt</span></h3>
 			<form action="/order/place/' . $id . '" method="post">
-				<div class="form-group">
-					<label for="quantity"> Quantity </label>
-					<input type="text" class="form-control" name="quantity">
-				</div>
 				<h4>Please choose colour</h4><div class="col-md-12">' );
 			foreach ( $colors as $color ) {
 				echo( '
