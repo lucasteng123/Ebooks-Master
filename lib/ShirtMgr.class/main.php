@@ -83,8 +83,8 @@ class ShirtMgr {
 		$qr = $this->pdo->exec($sql);
 	}
 	function destroy_records() {
-		$stmt = $this->pdo->prepare("DROP TABLE IF EXISTS tshirts");
-		$stmt->execute();
+		$sql = file_get_contents($this->wd . "/table_deletion.sql");
+		$qr = $this->pdo->exec($sql);
 	}
 
 	// === TICKER MESSAGES ===
