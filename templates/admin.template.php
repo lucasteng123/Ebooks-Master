@@ -642,7 +642,6 @@
 
 
 			<div class="jq-page admin-canvas" data-name="shirts">
-				<form class="ajax-form blog-editor" data-name="tshirts_post">
 
 		<div class="col-xs-12 tshirt-container">
 				<?php
@@ -660,7 +659,7 @@
 			<div class="col-md-4"></div>
 			<div class="col-md-8"></div>
 
-			<form action="/tshirt-update"  method="post">
+			<form action="<?php echo WEB_PATH; ?>/?location=tshirt-update"  method="post">
 
 				<div class="form-group">
 				<label for="image"> Path to Image </label>
@@ -698,7 +697,6 @@
 				</div>
 			</form>	
 		</div>				
-				</form>
 			</div>
 
 			<div class="jq-page admin-canvas" data-name="moderators">
