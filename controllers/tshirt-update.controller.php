@@ -5,6 +5,33 @@ $methods[ 'error' ] = function ( $instance ) {
 	echo '{"error": "Something went wrong"}';
 };
 
+$methods[ 'insert_tshirt' ] = function ( $instance ) {
+
+	$imgdb = new ImageDB($con);
+
+	$imageID   = $imgdb->add_from_post_request('post_image',"Post Image");
+	$imageName = $imgdb->get_image_by_id($imageID)['filename'];
+
+	$image = $_POST[ "image" ];
+	$colors = $_POST[ "colors" ];
+	$name = $_POST[ "name" ];
+	$price = $_POST[ "price" ];
+	$size = $_POST[ "size" ];
+	$description = $_POST[ "description" ];
+
+	// Add tshirt
+	$stmt = $pdo->prepare( $insert_tshirt );
+	// Bind variables
+	$stmt->bindValue( "img", "/uploads/".$imageName, PDO::PARAM_STR );
+	$stmt->bindValue( "nm", $name, PDO::PARAM_STR );
+	$stmt->bindValue( "color", $colors, PDO::PARAM_STR );
+	$stmt->bindValue( "price", $price, PDO::PARAM_STR );
+	$stmt->bindValue( "size", $size, PDO::PARAM_STR );
+	$stmt->bindValue( "description", $description, PDO::PARAM_STR );
+	// Insert the row
+	$stmt->execute();
+}
+
 $methods[ 'run' ] = function ( $instance ) {
 	$tshirtID = 0;
 	// Get tools
