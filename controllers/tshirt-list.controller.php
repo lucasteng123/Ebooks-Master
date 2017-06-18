@@ -21,6 +21,7 @@ $methods[ 'run' ] = function ( $instance ) {
 	$tmpl = new Template();
 	$tmpl->set_template_file(SITE_PATH . '/templates/tshirts.template.php');
 	$tmpl->tshirts = $result;
+	$tmpl->run();
 };
 
 $page_controller = new Controller( $methods );

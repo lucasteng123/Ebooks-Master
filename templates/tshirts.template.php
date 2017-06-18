@@ -4,7 +4,9 @@
 	<?php
 		foreach($tshirts as $tshirt) {
 			$tmpl = new Template();
-			$tmpl->set_template_file(SITE_PATH . '/templates/parts/tshirt_single.template.php')
+			$tmpl->tshirt = $tshirt;
+			$tmpl->set_template_file(SITE_PATH . '/templates/parts/tshirt_single.template.php');
+			$tmpl->run();
 		}
 	?>
 <!-- </div> -->
