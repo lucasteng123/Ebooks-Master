@@ -1,7 +1,12 @@
 
 <!-- <div class="pagebox feature-pagebox jq-tab-scope"> -->
 
-	<?php include(SITE_PATH.'/templates/parts/tshirts.template.php'); ?>
+	<?php
+		foreach($tshirts as $tshirt) {
+			$tmpl = new Template();
+			$tmpl->set_template_file(SITE_PATH . '/templates/parts/tshirt_single.template.php')
+		}
+	?>
 <!-- </div> -->
 
 
