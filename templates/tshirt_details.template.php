@@ -2,7 +2,7 @@
 echo('
 	<div class="row">
 		<div class="col-md-7">
-			<img src = "' . $tshirt[ "image" ] . '" class="img-thumbnail" />
+			<img src = "' . WEB_PATH . $tshirt[ "image" ] . '" class="img-thumbnail" />
 		</div>
 		<div class="col-md-5">
 			<h1>' . $tshirt[ "name" ] . '</h1>
