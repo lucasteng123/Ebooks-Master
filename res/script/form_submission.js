@@ -264,7 +264,9 @@ function set_ajax_submits() {
 					});
 					$(obj).find('.checkbox-input').each(function (j, inputObj) {
 						var selectedOptions = [];
+						alert("found a place for checkboxes");
 						$(this).find('input[type=checkbox]').each(function () {
+							alert('found a checkbox:', this.checked);
 							if (this.checked == true) {
 								selectedOptions.push(this.value);
 							}
