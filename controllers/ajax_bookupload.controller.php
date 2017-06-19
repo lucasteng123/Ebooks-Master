@@ -9,12 +9,12 @@ sleep(5);
 session_start();
 
 // Using the Isbn library; https://github.com/Fale/isbn
-require_once(SITE_PATH.'/lib/vendor/isbn/Check.php');
-require_once(SITE_PATH.'/lib/vendor/isbn/CheckDigit.php');
-require_once(SITE_PATH.'/lib/vendor/isbn/Hyphens.php');
-require_once(SITE_PATH.'/lib/vendor/isbn/Translate.php');
-require_once(SITE_PATH.'/lib/vendor/isbn/Validation.php');
-require_once(SITE_PATH.'/lib/vendor/isbn/Isbn.php');
+//require_once(SITE_PATH.'/lib/vendor/isbn/Check.php');
+//require_once(SITE_PATH.'/lib/vendor/isbn/CheckDigit.php');
+//require_once(SITE_PATH.'/lib/vendor/isbn/Hyphens.php');
+//require_once(SITE_PATH.'/lib/vendor/isbn/Translate.php');
+//require_once(SITE_PATH.'/lib/vendor/isbn/Validation.php');
+//require_once(SITE_PATH.'/lib/vendor/isbn/Isbn.php');
 
 $methods = array();
 
@@ -40,14 +40,14 @@ $methods['run'] = function($instance) {
 		$sitedb = new SiteDB($con);
 
 		// Instantiate ISBN validation library
-		$isbn = new Isbn\Isbn();
+		//$isbn = new Isbn\Isbn();
 
 		// Input Validation
 		{
 
 			// Attain valid ISBN (or fail and break)
-			$user_isbn = $_POST['isbn'];
-			$isbn_clean = '';
+			$isbn_clean = $_POST['isbn'];
+			/*$isbn_clean = '';
 			if (!isset($_POST['isbn']) || $user_isbn == '') {
 				//
 			} else {
@@ -62,8 +62,8 @@ $methods['run'] = function($instance) {
 				if ( ! $isbn->check->is13($isbn_clean) ) {
 					$isbn_clean = $isbn->translate->to13($isbn_clean);
 				}
-				$isbn_clean = $isbn->hyphens->addHyphens($isbn_clean);
-			}
+				//$isbn_clean = $isbn->hyphens->addHyphens($isbn_clean);
+			}*/
 			
 			// Ensure no duplicate ISBN
 
@@ -74,6 +74,7 @@ $methods['run'] = function($instance) {
 			$price    = trim($_POST['book_price']);
 			$link     = trim($_POST['book_link']);
 			$category = json_decode($_POST['category']);
+			$bookentryID = 0;
 
 			// Instantiate the validator
 //*			// * change 'default' to 'string-multilang' to whitelist characters
@@ -180,15 +181,7 @@ $methods['run'] = function($instance) {
 			if (DEV_MODE) $mailer->set_fake_mail(true);
 			$mailer->send_user_email($ss->get_value('mail.newbooks'),"New Book for Approval",$tmpl);
 			$options = $_POST["paylist"];
-			foreach( $options as $option ){
-				 $insert_tshirt = "INSERT INTO pay_list_orders (pay_list_id, book_id) VALUES (:plid, :bid)";
-				$stmt = $con->prepare( $insert_tshirt );
-				// Bind variables
-				$stmt->bindValue( "plid", $image, PDO::PARAM_INT );
-				$stmt->bindValue( "bid", $name, PDO::PARAM_INT );
-				// Insert the row
-				$stmt->execute();
-			}
+			print_r($_POST);
 			
 			$json['status'] = "okay";
 			$json['message'] = "Upload script not complete yet.";
@@ -209,6 +202,17 @@ $methods['run'] = function($instance) {
 			$_SESSION['book-pending-account']['title'] = $title;
 			$_SESSION['book-pending-account']['url'] = "?location=book/".$bookentryID;
 		}
+		echo "hi";
+		foreach( $options as $option ){
+			
+				$insert_tshirt = "INSERT INTO pay_list_orders (pay_list_id, book_id) VALUES (:plid, :bid)";
+				$stmt = $con->prepare( $insert_tshirt );
+				// Bind variables
+				$stmt->bindValue( "plid", $option, PDO::PARAM_INT );
+				$stmt->bindValue( "bid", $bookentryID, PDO::PARAM_INT );
+				// Insert the row
+				$stmt->execute();
+			}
 
 	} catch (ImageDBException $e) {
 			$json['status'] = "form_error";
