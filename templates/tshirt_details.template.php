@@ -24,15 +24,14 @@ echo('
 			echo('</div><div class="row">
          <div class="form-group">
           <label class="control-label col-sm-3">Size</label>
-          <div class="text-right col-sm-9">
-            <div id="button1idGroup" class="btn-group" role="group" aria-label="Button Group">');
+          <div class="text-right col-sm-9">');
 			foreach ( $sizes as $size ) {
 				echo( '
-				<button type="button" id="button1id" name="button1id" class="btn btn-default" aria-label="Left Button">' . $size . '</button>' );
+				<div class="form-group col-md-2" style="text-align:center; padding:0px 10px; background-color: #EEE;">
+					<input type="radio" class="form-control" style="display: inline-block;" value="' . $size . '" name="colors">&nbsp;'.$size.'
+				</div>' );
 			}
 			echo( '
-				
-				</div>
             <p class="help-block">Select the size you wish to purchase</p>
           </div>
         </div>
