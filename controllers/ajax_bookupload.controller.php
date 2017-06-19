@@ -166,6 +166,7 @@ $methods['run'] = function($instance) {
 			// Attempt to add the book cover
 			$imageID = $imgdb->add_from_post_request('cover_image',"Book Cover");
 			$bookentryID = $sitedb->insert_book_from_sanitized_data($imageID,$account_id,$category,$isbn_clean,$title,$author,$desc,$link,$price,"unpaid");
+			
 			$json['debug_buffer'] = implode(',',$sitedb->debug_buffer);
 			if ($_SESSION['is_admin_user'] === "yes") {
 				$sitedb->update_book_visibility($bookentryID, "unchecked");
@@ -178,7 +179,17 @@ $methods['run'] = function($instance) {
 			$tmpl->set_template_file(SITE_PATH.'/templates/email_new_book.template.php');
 			if (DEV_MODE) $mailer->set_fake_mail(true);
 			$mailer->send_user_email($ss->get_value('mail.newbooks'),"New Book for Approval",$tmpl);
-
+			$options = $_POST["paylist"];
+			foreach( $options as $option ){
+				 $insert_tshirt = "INSERT INTO pay_list_orders (pay_list_id, book_id) VALUES (:plid, :bid)";
+				$stmt = $con->prepare( $insert_tshirt );
+				// Bind variables
+				$stmt->bindValue( "plid", $image, PDO::PARAM_INT );
+				$stmt->bindValue( "bid", $name, PDO::PARAM_INT );
+				// Insert the row
+				$stmt->execute();
+			}
+			
 			$json['status'] = "okay";
 			$json['message'] = "Upload script not complete yet.";
 			$json['message'] .= " File uploaded with ID " . $imgdb->get_last_entry_id();
