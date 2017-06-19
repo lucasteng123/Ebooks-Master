@@ -14,6 +14,7 @@ function setup_full_template($tmpl, $sitedb, $ss, $RO_SESSION) {
 	$tmpl->ss = $ss;
 	$tmpl->ticker_messages = $sitedb->list_ticker_messages();
 	$tmpl->categories = $sitedb->list_categories();
+	$tmpl->paylist_items = $sitedb->get_pay_list();
 
 	if (isset($RO_SESSION['book-pending-account'])) {
 		$tmpl->book_pending = htmlentities($RO_SESSION['book-pending-account']['title'], ENT_QUOTES, 'UTF-8');
