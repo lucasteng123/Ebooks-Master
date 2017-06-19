@@ -1,8 +1,5 @@
 <?php
 
-session_start();
-require_once(SITE_PATH.'/scripts/setup_full_template.php');
-
 $methods = array();
 
 $methods[ 'error' ] = function ( $instance ) {
