@@ -262,6 +262,16 @@ function set_ajax_submits() {
 						// console.log(selectedOptions);
 						form_data.append($(this).attr('name'), JSON.stringify(selectedOptions));
 					});
+					$(obj).find('.checkbox-input').each(function (j, inputObj) {
+						var selectedOptions = [];
+						$(this).find('input[type=checkbox]').each(function () {
+							if (this.checked == true) {
+								selectedOptions.push(this.value);
+							}
+						});
+						// console.log(selectedOptions);
+						form_data.append($(this).attr('name'), JSON.stringify(selectedOptions));
+					});
 				}
 				var jqxhr = $.ajax({
 					type: "POST",
