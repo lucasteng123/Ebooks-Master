@@ -74,6 +74,7 @@ $methods['run'] = function($instance) {
 			$price    = trim($_POST['book_price']);
 			$link     = trim($_POST['book_link']);
 			$category = json_decode($_POST['category']);
+			$options  = json_decode($_POST["paylist"]);
 			$bookentryID = 0;
 
 			// Instantiate the validator
@@ -180,8 +181,8 @@ $methods['run'] = function($instance) {
 			$tmpl->set_template_file(SITE_PATH.'/templates/email_new_book.template.php');
 			if (DEV_MODE) $mailer->set_fake_mail(true);
 			$mailer->send_user_email($ss->get_value('mail.newbooks'),"New Book for Approval",$tmpl);
-			$options = $_POST["paylist"];
-			print_r($_POST);
+			
+			//print_r($_POST);
 			
 			$json['status'] = "okay";
 			$json['message'] = "Upload script not complete yet.";
