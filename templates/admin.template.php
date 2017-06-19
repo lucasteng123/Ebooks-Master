@@ -672,6 +672,8 @@
       				<input name="image" type="file" />
 				</div>
 				</div>
+				Post ID (for testing)
+				<input type="text" name="id" value="" />
 				<div class="form-group">
 					<label for="name"> Name for T-Shirt </label>
 					<input type="text" class="form-control" name="name">
@@ -694,6 +696,8 @@
 					<input type="text" class="form-control" name="price">
 				</div>
 				<div class="form-group">
+					<input class="btn btn-primary"
+					type="submit" value="Delete" name="delete">
 					<input class="btn btn-primary" type="submit">
 				</div>
 			</form>	

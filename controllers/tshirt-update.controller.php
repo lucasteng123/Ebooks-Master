@@ -47,57 +47,71 @@ $methods[ 'run' ] = function ( $instance ) {
 	$redirect_url = WEB_PATH . "/?location=admin/shirts";
 	$message = "No message";
 
-	$insert_tshirt = "INSERT INTO tshirts (image, name, colors, price, size, description) VALUES (:img, :nm, :color, :price, :size, :description)";
-
-
-	//get POST variables
-	if ( $_POST[ "image" ] && $_POST[ "colors" ] && $_POST[ "name" ] && $_POST[ "price" ] ) {
-		// Do nothing
-	} else {
-		$message = "no post";
-	}
-	$image = $_POST[ "image" ];
-	$colors = $_POST[ "colors" ];
-	$name = $_POST[ "name" ];
-	$price = $_POST[ "price" ];
-	//if there are no t-shirt ids passed
-	if ( count( $r ) < 1 ) {
-		$instance->insert_tshirt();
-		$message = "created tshirt";
-		//if there is a tshirt id passed
-	} else {
-		$tshirtID = $r[ 0 ];
-		// === check for existing t-shirts === //
-		$sql = "SELECT * FROM tshirts t WHERE t.id=:tshirtID";
-		// Prepare statement
-		$stmt = $pdo->prepare( $sql );
-		// Bind values
-		$stmt->bindValue( "tshirtID", $tshirtID, PDO::PARAM_INT );
+	// Special case: if delete option, disable tshirt
+	if ( $_POST['delete'] ) {
+		//set last version of shirt as inactive
+		$insert_tshirt = "UPDATE tshirts SET active = 0 where id = :id";
+		$stmt = $pdo->prepare( $insert_tshirt );
+		// Bind variables
+		$stmt->bindValue( "id", $r[ 0 ], PDO::PARAM_INT );
+		// Insert the row
 		$stmt->execute();
-		// Fetch results into associative array
-		$result = array();
-		while ( $row = $stmt->fetch( PDO::FETCH_ASSOC ) ) {
-			$result[] = $row;
+		$message = "deleted a shirt";
+
+	} else {
+
+		$insert_tshirt = "INSERT INTO tshirts (image, name, colors, price, size, description) VALUES (:img, :nm, :color, :price, :size, :description)";
+
+
+		//get POST variables
+		if ( $_POST[ "image" ] && $_POST[ "colors" ] && $_POST[ "name" ] && $_POST[ "price" ] ) {
+			// Do nothing
+		} else {
+			$message = "no post";
 		}
-
-
-		//if there is no tshirt with this ID, create it
-		if ( count( $result ) != 1 ) {
+		$image = $_POST[ "image" ];
+		$colors = $_POST[ "colors" ];
+		$name = $_POST[ "name" ];
+		$price = $_POST[ "price" ];
+		//if there are no t-shirt ids passed
+		if ( count( $r ) < 1 ) {
 			$instance->insert_tshirt();
 			$message = "created tshirt";
-
+			//if there is a tshirt id passed
 		} else {
-			//set last version of shirt as inactive
-			$insert_tshirt = "UPDATE tshirts SET active = 0 where id = :id";
-			$stmt = $pdo->prepare( $insert_tshirt );
-			// Bind variables
-			$stmt->bindValue( "id", $r[ 0 ], PDO::PARAM_INT );
-			// Insert the row
+			$tshirtID = $r[ 0 ];
+			// === check for existing t-shirts === //
+			$sql = "SELECT * FROM tshirts t WHERE t.id=:tshirtID";
+			// Prepare statement
+			$stmt = $pdo->prepare( $sql );
+			// Bind values
+			$stmt->bindValue( "tshirtID", $tshirtID, PDO::PARAM_INT );
 			$stmt->execute();
-			$message = "updated old tshirt";
-			
-			$instance->insert_tshirt();
-			$message = "created new tshirt";
+			// Fetch results into associative array
+			$result = array();
+			while ( $row = $stmt->fetch( PDO::FETCH_ASSOC ) ) {
+				$result[] = $row;
+			}
+
+
+			//if there is no tshirt with this ID, create it
+			if ( count( $result ) != 1 ) {
+				$instance->insert_tshirt();
+				$message = "created tshirt";
+
+			} else {
+				//set last version of shirt as inactive
+				$insert_tshirt = "UPDATE tshirts SET active = 0 where id = :id";
+				$stmt = $pdo->prepare( $insert_tshirt );
+				// Bind variables
+				$stmt->bindValue( "id", $r[ 0 ], PDO::PARAM_INT );
+				// Insert the row
+				$stmt->execute();
+				$message = "updated old tshirt";
+				
+				$instance->insert_tshirt();
+				$message = "created new tshirt";
+			}
 		}
 	}
 	?>

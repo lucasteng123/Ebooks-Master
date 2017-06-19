@@ -90,7 +90,7 @@ class ShirtMgr {
 	function get_tshirt_list() {
 		// Get tools
 		$pdo = $this->pdo;
-		$sql = "SELECT * FROM tshirts";
+		$sql = "SELECT * FROM tshirts WHERE active=1";
 		// Prepare statement
 		$stmt = $pdo->prepare( $sql );
 		// Bind values
