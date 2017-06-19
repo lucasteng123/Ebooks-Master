@@ -266,13 +266,17 @@ function set_ajax_submits() {
 						var selectedOptions = [];
 						alert("found a place for checkboxes");
 						$(this).find('input[type=checkbox]').each(function () {
-							alert('found a checkbox:', this.checked);
+							alert('found a checkbox:'+ $(this).is(":checked"));
+							console.log(this);
+							
 							if (this.checked == true) {
 								selectedOptions.push(this.value);
+								console.log(this.value);
+								
 							}
 						});
 						// console.log(selectedOptions);
-						form_data.append($(this).attr('name'), JSON.stringify(selectedOptions));
+						form_data.append('paylist', JSON.stringify(selectedOptions));
 					});
 				}
 				var jqxhr = $.ajax({

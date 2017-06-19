@@ -73,7 +73,7 @@ $methods['run'] = function($instance) {
 		$link     = trim($_POST['book_link']);
 		$category = json_decode($_POST['category']);
 		$options  = json_decode($_POST["paylist"]);
-		print($_POST["paylist"])
+		print_r($_POST);
 		print_r($options);
 		$bookentryID = 0;
 
