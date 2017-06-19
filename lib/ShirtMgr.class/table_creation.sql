@@ -32,3 +32,16 @@ CREATE TABLE IF NOT EXISTS pay_list
 		active TINYINT,
         PRIMARY KEY (id)
         ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+
+CREATE TABLE IF NOT EXISTS pay_list_orders
+        (
+        id MEDIUMINT NOT NULL AUTO_INCREMENT,
+        pay_list_id MEDIUMINT,
+		book_id MEDIUMINT,
+		FOREIGN KEY (pay_list_id) REFERENCES pay_list(id),
+		FOREIGN KEY (book_id) REFERENCES books(id),
+        PRIMARY KEY (id)
+        ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+
+
+		
