@@ -41,123 +41,119 @@ $methods['run'] = function($instance) {
 
 		// Instantiate ISBN validation library
 		//$isbn = new Isbn\Isbn();
+		
 
-		// Input Validation
-		{
+		// Attain valid ISBN (or fail and break)
+		$isbn_clean = $_POST['isbn'];
+		/*$isbn_clean = '';
+		if (!isset($_POST['isbn']) || $user_isbn == '') {
+			//
+		} else {
+			$isbn_clean = $isbn->hyphens->removeHyphens($user_isbn);
+			if (!$isbn->validation->isbn($isbn_clean)) {
+				$json['status'] = "form_error";
+				$json['message'] = "You entered an invalid ISBN! :/";
+				ob_clean();
+				echo json_encode($json);
+				return;
+			}
+			if ( ! $isbn->check->is13($isbn_clean) ) {
+				$isbn_clean = $isbn->translate->to13($isbn_clean);
+			}
+			//$isbn_clean = $isbn->hyphens->addHyphens($isbn_clean);
+		}*/
+		
+		// Ensure no duplicate ISBN
 
-			// Attain valid ISBN (or fail and break)
-			$isbn_clean = $_POST['isbn'];
-			/*$isbn_clean = '';
-			if (!isset($_POST['isbn']) || $user_isbn == '') {
-				//
-			} else {
-				$isbn_clean = $isbn->hyphens->removeHyphens($user_isbn);
-				if (!$isbn->validation->isbn($isbn_clean)) {
-					$json['status'] = "form_error";
-					$json['message'] = "You entered an invalid ISBN! :/";
-					ob_clean();
-					echo json_encode($json);
-					return;
-				}
-				if ( ! $isbn->check->is13($isbn_clean) ) {
-					$isbn_clean = $isbn->translate->to13($isbn_clean);
-				}
-				//$isbn_clean = $isbn->hyphens->addHyphens($isbn_clean);
-			}*/
-			
-			// Ensure no duplicate ISBN
+		// Validate other inputs
+		$title    = trim($_POST['book_title']);
+		$author   = trim($_POST['book_author']);
+		$desc     = trim($_POST['book_description']);
+		$price    = trim($_POST['book_price']);
+		$link     = trim($_POST['book_link']);
+		$category = json_decode($_POST['category']);
+		$options  = json_decode($_POST["paylist"]);
+		$bookentryID = 0;
 
-			// Validate other inputs
-			$title    = trim($_POST['book_title']);
-			$author   = trim($_POST['book_author']);
-			$desc     = trim($_POST['book_description']);
-			$price    = trim($_POST['book_price']);
-			$link     = trim($_POST['book_link']);
-			$category = json_decode($_POST['category']);
-			$options  = json_decode($_POST["paylist"]);
-			$bookentryID = 0;
-
-			// Instantiate the validator
+		// Instantiate the validator
 //*			// * change 'default' to 'string-multilang' to whitelist characters
-			$FV_std = new FieldValidator();
-			$FV_std->set_filter_setting('default_preset','default'); // Allow multilingual characters
+		$FV_std = new FieldValidator();
+		$FV_std->set_filter_setting('default_preset','default'); // Allow multilingual characters
 
-			$FV_std->set_filter_setting('range',"{1,200}");
-			if (!$FV_std->verify($title)) {
+		$FV_std->set_filter_setting('range',"{1,200}");
+		if (!$FV_std->verify($title)) {
+			$json['status'] = "form_error";
+			$json['message'] = "The title was empty, too long, or invalid.";
+			ob_clean();
+			echo json_encode($json);
+			return;
+		}
+
+		$FV_std->set_filter_setting('range',"{1,100}");
+		if (!$FV_std->verify($author)) {
+			$json['status'] = "form_error";
+			$json['message'] = "The author was empty, too long, or invalid.";
+			ob_clean();
+			echo json_encode($json);
+			return;
+		}
+
+		$FV_std->set_filter_setting('range',"{1,1200}");
+		if (!$FV_std->verify(str_replace("\n",'?',$desc))) {
+			$json['status'] = "form_error";
+			$json['message'] = "The description was empty, too long, or invalid.";
+			ob_clean();
+			echo json_encode($json);
+			return;
+		}
+
+		// Add protocol before testing valid URL
+		$regex_has_protocol = '/^([A-z]+):\/\//';
+		if (!preg_match($regex_has_protocol, $link)) {
+			$link = "http://".$link;
+		}
+		if ( filter_var($link, FILTER_VALIDATE_URL) === false ) {
+			$json['status'] = "form_error";
+			$json['message'] = "The URL was empty, too long, or invalid.";
+			ob_clean();
+			echo json_encode($json);
+			return;
+		}
+
+		$price = str_replace('$','',$price);
+		if (!is_numeric($price)) {
+			$json['status'] = "form_error";
+			$json['message'] = "The price was empty, too long, or invalid.";
+			ob_clean();
+			echo json_encode($json);
+			return;
+		}
+
+		if ( ! is_array($category) || count($category) < 1) {
+			$json['status'] = "form_error";
+			$json['message'] = "Please select a category.";
+			echo json_encode($json);
+			return;
+		}
+		foreach ($category as $cat) {
+			if ( filter_var($cat, FILTER_VALIDATE_INT) === false ) {
 				$json['status'] = "form_error";
-				$json['message'] = "The title was empty, too long, or invalid.";
+				ob_start();
+				print_r($_POST);
+				$thing = ob_get_clean();
+				$json['deets'] = $thing;
+				$json['message'] = "Invalid category selection. (".$cat.")";
 				ob_clean();
 				echo json_encode($json);
 				return;
 			}
-
-			$FV_std->set_filter_setting('range',"{1,100}");
-			if (!$FV_std->verify($author)) {
+			if ( ! $sitedb->ensure_category_exists($cat) ) {
 				$json['status'] = "form_error";
-				$json['message'] = "The author was empty, too long, or invalid.";
+				$json['message'] = "An error occured locating a category.";
 				ob_clean();
 				echo json_encode($json);
 				return;
 			}
-
-			$FV_std->set_filter_setting('range',"{1,1200}");
-			if (!$FV_std->verify(str_replace("\n",'?',$desc))) {
-				$json['status'] = "form_error";
-				$json['message'] = "The description was empty, too long, or invalid.";
-				ob_clean();
-				echo json_encode($json);
-				return;
-			}
-
-			// Add protocol before testing valid URL
-			$regex_has_protocol = '/^([A-z]+):\/\//';
-			if (!preg_match($regex_has_protocol, $link)) {
-				$link = "http://".$link;
-			}
-			if ( filter_var($link, FILTER_VALIDATE_URL) === false ) {
-				$json['status'] = "form_error";
-				$json['message'] = "The URL was empty, too long, or invalid.";
-				ob_clean();
-				echo json_encode($json);
-				return;
-			}
-
-			$price = str_replace('$','',$price);
-			if (!is_numeric($price)) {
-				$json['status'] = "form_error";
-				$json['message'] = "The price was empty, too long, or invalid.";
-				ob_clean();
-				echo json_encode($json);
-				return;
-			}
-
-			if ( ! is_array($category) || count($category) < 1) {
-				$json['status'] = "form_error";
-				$json['message'] = "Please select a category.";
-				echo json_encode($json);
-				return;
-			}
-			foreach ($category as $cat) {
-				if ( filter_var($cat, FILTER_VALIDATE_INT) === false ) {
-					$json['status'] = "form_error";
-					ob_start();
-					print_r($_POST);
-					$thing = ob_get_clean();
-					$json['deets'] = $thing;
-					$json['message'] = "Invalid category selection. (".$cat.")";
-					ob_clean();
-					echo json_encode($json);
-					return;
-				}
-				if ( ! $sitedb->ensure_category_exists($cat) ) {
-					$json['status'] = "form_error";
-					$json['message'] = "An error occured locating a category.";
-					ob_clean();
-					echo json_encode($json);
-					return;
-				}
-			}
-
 		}
 
 		// Check if user is logged in
