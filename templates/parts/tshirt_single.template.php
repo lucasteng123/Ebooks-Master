@@ -7,7 +7,7 @@ echo('<div class="col-md-3 col-xs-6">
 		<img src="' . WEB_PATH . $tshirt["image"] . '">');
 } else {
 echo('<div class="col-md-3 col-xs-6">
-	<a href="/order/details/' . $tshirt["id"] . '" class="thumbnail tshirt-thumb">
+	<a href="'.WEB_PATH.'?location=order/details/' . $tshirt["id"] . '" class="thumbnail tshirt-thumb">
 		<img src="' . WEB_PATH . $tshirt["image"] . '">');
 }
 	?>
