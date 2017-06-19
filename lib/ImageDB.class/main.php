@@ -93,6 +93,9 @@ class ImageDB {
 					throw new ImageDBException("The image sent is too large.",ImageDBException::ERR_FILE_TOO_LARGE);
 					break;
 				default:
+					if (DEV_MODE) {
+						print_r($_FILES[$files_key]);
+					}
 					throw new ImageDBException("An error occured while uploading the file.",ImageDBException::ERR_UPLOAD_ERR);
 			}
 			
