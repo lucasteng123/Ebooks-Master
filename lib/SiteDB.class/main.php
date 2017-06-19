@@ -689,7 +689,7 @@ class SiteDB {
 	}
 	function get_pay_list(){
 		$sql = "SELECT * FROM pay_list where active = 1";
-		$stmt = $this->pdo->prepare(sql);
+		$stmt = $this->pdo->prepare($sql);
 		$stmt->execute();
 		$paylist = array();
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
