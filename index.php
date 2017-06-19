@@ -1,5 +1,5 @@
 <?php
-// define('DEV_MODE', true);
+ define('DEV_MODE', true);
 /*
 switch (gethostname()) {
 	case "freakin-anvil-of-a-pc":

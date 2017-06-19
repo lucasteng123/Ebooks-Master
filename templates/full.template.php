@@ -253,6 +253,7 @@ if ( isset( $title ) )$pageTitle = $title . " | " . $pageTitle;
 												<span class="input-group-btn">
 													<span class="progress-under-button progress-bar progress-bar-striped active"></span>
 											
+
 												<span class="file-upload-button btn btn-primary btn-file">Browse...
 														<input name="cover_image" class="ajax-file-upload file-input" type="file" multiple />
 													</span>
@@ -276,25 +277,31 @@ if ( isset( $title ) )$pageTitle = $title . " | " . $pageTitle;
 											<input id="book_price" name="book_price" type="text" class="normal-input form-control input-md" placeholder="$1.00" required=""/>
 										</div>
 									</div>
-									<div class="row">
-										<?php 
+									<div class="form-group">
+										<label class= "col-md-3 control-label" for="paylist">Other Options</label>
+										<div class="col-xs-9" style="border-left: 1px #D1D1D1 solid;">
+											<?php 
 										$dark = true;
 										foreach ($paylist_items as $paylist_item){?>
-											
-										<div class="row<?php if($dark){ ?> darkbg<?php } ?>">
-											<div class="col-xs-1" style="margin-top: 20px">
-												<input type="checkbox" name="paylist[]" value="<?php echo($paylist_item["id"]);?>">
-											</div>
-											<div class="col-xs-11">
-												<div class="row">
-													<h3 style="margin:8px 0px 0px;"><?php echo($paylist_item["copy"]);?></h3>
+											<div class="row paylist<?php if($dark){ ?> darkbg<?php } ?>">
+												<div class="col-xs-1" style="margin-top: 20px">
+													<input type="checkbox" name="paylist[]" value="<?php echo($paylist_item[" id "]);?>">
 												</div>
-												<div class="row">
-													<p style="font-weight: 200"><?php echo($paylist_item["price"]);?></p>
+												<div class="col-xs-11">
+													<div class="row">
+														<h4 style="margin:8px 0px 0px;">
+															<?php echo($paylist_item["copy"]);?>
+														</h4>
+													</div>
+													<div class="row">
+														<p style="font-weight: 200">
+															<?php echo($paylist_item["price"]);?>
+														</p>
+													</div>
 												</div>
 											</div>
+											<?php $dark = !$dark;} ?>
 										</div>
-										<?php $dark = !$dark;} ?>
 									</div>
 									<div class="form-group" style="padding:0;margin:0;">
 										<div class="col-md-3">&nbsp;</div>
@@ -358,6 +365,7 @@ if ( isset( $title ) )$pageTitle = $title . " | " . $pageTitle;
 									class="btn btn-success slideout-hide">My Account</button>
 								</a>
 								
+
 									<button type="submit" id="logout" name="logout" class="btn btn-danger otherside">Log Out</button>
 									<div class="padding"></div>
 								</form>
@@ -681,6 +689,7 @@ if ( isset( $title ) )$pageTitle = $title . " | " . $pageTitle;
 					<span class="loadable-page-part<?php echo ($show_bookslistctrl===true) ? " " : " dispnone " ?>" id="LPP-bookslistctrl">
 		          	</span>
 				
+
 					<span class="loadable-page-part" id="LPP-bookslist" data-currentview="none">
 						<?php
 						if ( isset( $part_bookslist ) ) {
