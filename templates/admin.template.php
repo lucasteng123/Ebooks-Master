@@ -42,6 +42,7 @@
 		// JS
 		HtmlShortcuts::includeJS($scriptPath.'gui.js');
 		HtmlShortcuts::includeJS($scriptPath.'admin_page.js');
+		HtmlShortcuts::includeJS($scriptPath.'tshirts.js');
 		HtmlShortcuts::includeJS($scriptPath.'lib/BlogEditor.js');
 
 	?>
@@ -647,6 +648,7 @@
 				<?php
 				$tmpl = new Template();
 				$tmpl->set_template_file(SITE_PATH . '/templates/parts/tshirt_single.template.php');
+				$tmpl->disableLink = true;
 				foreach($shirts_list as $tshirt) {
 					$tmpl->tshirt = $tshirt;
 					$tmpl->run();
@@ -654,12 +656,15 @@
 				?>
 		</div>
 		<div class="col-xs-12"><hr></div>
-		<div class="col-md-3"><h2 style="text-align: right;vertical-align: center;">New T-Shirt</h2></div>
+		<div class="col-md-3"><h2 style="text-align: right;vertical-align: center;"
+			id="elem-that-says-new-tshirt">New T-Shirt</h2></div>
 		<div class="col-md-9">
 			<div class="col-md-4"></div>
 			<div class="col-md-8"></div>
 
-			<form action="<?php echo WEB_PATH; ?>/?location=tshirt-update"  method="post" enctype="multipart/form-data">
+			<form id="tshirt_update_form"
+			action="<?php echo WEB_PATH; ?>/?location=tshirt-update"  method="post" enctype="multipart/form-data">
+				<span data-name="base_action"><?php echo WEB_PATH; ?>/?location=tshirt-update</span>
 
 				<div class="form-group">
 				<label for="image"> Path to Image </label>
