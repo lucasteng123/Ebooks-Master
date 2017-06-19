@@ -6,3 +6,5 @@ _notes/
 /node_modules/
 /conf/database.ini
 log.txt
+/uploads/
+index.php
