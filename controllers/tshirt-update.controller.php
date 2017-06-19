@@ -6,10 +6,11 @@ $methods[ 'error' ] = function ( $instance ) {
 };
 
 $methods[ 'insert_tshirt' ] = function ( $instance ) {
+	$pdo = $instance->tools[ 'con_manager' ]->get_connection();
 
-	$imgdb = new ImageDB($con);
+	$imgdb = new ImageDB($pdo);
 
-	$imageID   = $imgdb->add_from_post_request('post_image',"Post Image");
+	$imageID   = $imgdb->add_from_post_request('image',"Post Image");
 	$imageName = $imgdb->get_image_by_id($imageID)['filename'];
 
 	$image = $_POST[ "image" ];
@@ -19,10 +20,12 @@ $methods[ 'insert_tshirt' ] = function ( $instance ) {
 	$size = $_POST[ "size" ];
 	$description = $_POST[ "description" ];
 
+	$insert_tshirt = "INSERT INTO tshirts (image, name, colors, price, size, description) VALUES (:img, :nm, :color, :price, :size, :description)";
+
 	// Add tshirt
 	$stmt = $pdo->prepare( $insert_tshirt );
 	// Bind variables
-	$stmt->bindValue( "img", "/uploads/".$imageName, PDO::PARAM_STR );
+	$stmt->bindValue( "img", "/uploads/img/".$imageName, PDO::PARAM_STR );
 	$stmt->bindValue( "nm", $name, PDO::PARAM_STR );
 	$stmt->bindValue( "color", $colors, PDO::PARAM_STR );
 	$stmt->bindValue( "price", $price, PDO::PARAM_STR );
@@ -30,7 +33,7 @@ $methods[ 'insert_tshirt' ] = function ( $instance ) {
 	$stmt->bindValue( "description", $description, PDO::PARAM_STR );
 	// Insert the row
 	$stmt->execute();
-}
+};
 
 $methods[ 'run' ] = function ( $instance ) {
 	$tshirtID = 0;
@@ -59,17 +62,7 @@ $methods[ 'run' ] = function ( $instance ) {
 	$price = $_POST[ "price" ];
 	//if there are no t-shirt ids passed
 	if ( count( $r ) < 1 ) {
-		//create the TShirt
-		$stmt = $pdo->prepare( $insert_tshirt );
-		// Bind variables
-		$stmt->bindValue( "img", $image, PDO::PARAM_STR );
-		$stmt->bindValue( "nm", $name, PDO::PARAM_STR );
-		$stmt->bindValue( "color", $colors, PDO::PARAM_STR );
-		$stmt->bindValue( "price", $price, PDO::PARAM_STR );
-		$stmt->bindValue( "size", $size, PDO::PARAM_STR );
-		$stmt->bindValue( "description", $description, PDO::PARAM_STR );
-		// Insert the row
-		$stmt->execute();
+		$instance->insert_tshirt();
 		$message = "created tshirt";
 		//if there is a tshirt id passed
 	} else {
@@ -90,16 +83,7 @@ $methods[ 'run' ] = function ( $instance ) {
 
 		//if there is no tshirt with this ID, create it
 		if ( count( $result ) != 1 ) {
-			$stmt = $pdo->prepare( $insert_tshirt );
-			// Bind variables
-			$stmt->bindValue( "img", $image, PDO::PARAM_STR );
-			$stmt->bindValue( "nm", $name, PDO::PARAM_STR );
-			$stmt->bindValue( "color", $colors, PDO::PARAM_STR );
-			$stmt->bindValue( "price", $price, PDO::PARAM_STR );
-			$stmt->bindValue( "size", $size, PDO::PARAM_STR );
-			$stmt->bindValue( "description", $description, PDO::PARAM_STR );
-			// Insert the row
-			$stmt->execute();
+			$instance->insert_tshirt();
 			$message = "created tshirt";
 
 		} else {
@@ -112,17 +96,7 @@ $methods[ 'run' ] = function ( $instance ) {
 			$stmt->execute();
 			$message = "updated old tshirt";
 			
-			//add updated tshirt
-			$stmt = $pdo->prepare( $insert_tshirt );
-			// Bind variables
-			$stmt->bindValue( "img", $image, PDO::PARAM_STR );
-			$stmt->bindValue( "nm", $name, PDO::PARAM_STR );
-			$stmt->bindValue( "color", $colors, PDO::PARAM_STR );
-			$stmt->bindValue( "price", $price, PDO::PARAM_STR );
-			$stmt->bindValue( "size", $size, PDO::PARAM_STR );
-			$stmt->bindValue( "description", $description, PDO::PARAM_STR );
-			// Insert the row
-			$stmt->execute();
+			$instance->insert_tshirt();
 			$message = "created new tshirt";
 		}
 	}

@@ -659,16 +659,17 @@
 			<div class="col-md-4"></div>
 			<div class="col-md-8"></div>
 
-			<form action="<?php echo WEB_PATH; ?>/?location=tshirt-update"  method="post">
+			<form action="<?php echo WEB_PATH; ?>/?location=tshirt-update"  method="post" enctype="multipart/form-data">
 
 				<div class="form-group">
 				<label for="image"> Path to Image </label>
 				<div class="input-group">
 					
-					<input type="text" class="form-control" name="image">
+					<!-- <input type="text" class="form-control" name="image">
 					<span class="input-group-btn">
         				<button class="btn btn-default" type="button">Browse</button>
-      				</span>
+      				</span> -->
+      				<input name="image" type="file" />
 				</div>
 				</div>
 				<div class="form-group">
