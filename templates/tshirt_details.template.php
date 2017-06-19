@@ -13,7 +13,7 @@ echo('
       		</div>
 			
 			<h3><strong>$' . $tshirt[ "price" ] . '</strong><span style="font-weight: 200">/shirt</span></h3>
-			<form action="'.WEB_PATH.'?location=order/place/' . $id . '" method="post">
+			<form action="'.WEB_PATH.'/?location=order/place/' . $id . '" method="post">
 				<h4>Please choose colour</h4><div class="col-md-12">' );
 			foreach ( $colors as $color ) {
 				echo( '
@@ -28,7 +28,7 @@ echo('
 			foreach ( $sizes as $size ) {
 				echo( '
 				<div class="form-group col-md-2" style="text-align:center; padding:0px 10px; background-color: #EEE;">
-					<input type="radio" class="form-control" style="display: inline-block;" value="' . $size . '" name="colors">&nbsp;'.$size.'
+					<input type="radio" class="form-control" style="display: inline-block;" value="' . $size . '" name="size">&nbsp;'.$size.'
 				</div>' );
 			}
 			echo( '

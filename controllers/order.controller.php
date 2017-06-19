@@ -58,11 +58,13 @@ $methods[ 'run' ] = function ( $instance ) {
 		case "place":
 			//get POST variables
 			echo( '<html>' );
+			print_r($_POST);
 			$id = $r[ 1 ];
 			$color = $_POST[ "colors" ];
 			$pretty = chr( mt_rand( 97, 122 ) ) . substr( md5( time() ), 1 );
 			$email = $_POST[ "email" ];
 			$quantity = $_POST[ "quantity" ];
+			$size = $_POST["size"];
 
 			$insert_tshirt = "INSERT INTO orders (pretty_id, tshirt_id, color, email, quantity) VALUES (:pid, :id, :color, :email, :quantity)";
 			$stmt = $pdo->prepare( $insert_tshirt );
@@ -127,7 +129,7 @@ $methods[ 'run' ] = function ( $instance ) {
 
 			$sql = "SELECT * FROM orders o";
 			// Prepare statement
-			$stmt = $pdo->prepare( $sql );
+			$stmt = $con->prepare( $sql );
 			// Bind values
 			$stmt->execute();
 			// Fetch results into associative array
