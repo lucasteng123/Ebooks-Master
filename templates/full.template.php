@@ -277,7 +277,7 @@ if ( isset( $title ) )$pageTitle = $title . " | " . $pageTitle;
 											<input id="book_price" name="book_price" type="text" class="normal-input form-control input-md" placeholder="$1.00" required=""/>
 										</div>
 									</div>
-									<div class="form-group">
+									<div class="form-group checkbox-input"><!-- .checkbox-input class required for JavaScript handler -->
 										<label class= "col-md-3 control-label" for="paylist">Other Options</label>
 										<div class="col-xs-9" style="border-left: 1px #D1D1D1 solid;">
 											<?php 
@@ -285,7 +285,7 @@ if ( isset( $title ) )$pageTitle = $title . " | " . $pageTitle;
 										foreach ($paylist_items as $paylist_item){?>
 											<div class="row paylist<?php if($dark){ ?> darkbg<?php } ?>">
 												<div class="col-xs-1" style="margin-top: 20px">
-													<input type="checkbox" name="paylist[]" value="<?php echo($paylist_item[" id "]);?>">
+													<input type="checkbox" name="paylist" value="<?php echo($paylist_item[" id "]);?>">
 												</div>
 												<div class="col-xs-11">
 													<div class="row">
