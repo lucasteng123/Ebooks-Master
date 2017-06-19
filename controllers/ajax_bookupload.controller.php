@@ -41,7 +41,7 @@ $methods['run'] = function($instance) {
 
 		// Instantiate ISBN validation library
 		//$isbn = new Isbn\Isbn();
-		
+
 
 		// Attain valid ISBN (or fail and break)
 		$isbn_clean = $_POST['isbn'];
@@ -73,6 +73,8 @@ $methods['run'] = function($instance) {
 		$link     = trim($_POST['book_link']);
 		$category = json_decode($_POST['category']);
 		$options  = json_decode($_POST["paylist"]);
+		print($_POST["paylist"])
+		print_r($options);
 		$bookentryID = 0;
 
 		// Instantiate the validator
